@@ -32,6 +32,16 @@ function Nav() {
               Info Page
             </Link>
 
+            <Link className="navLink" to="/artists">
+              My Artists
+            </Link>
+
+            <Link className="navLink" to="/albums">
+              My Albums
+            </Link>
+
+
+
             <LogOutButton className="navLink" />
           </>
         )}

@@ -8,3 +8,23 @@ CREATE TABLE "user" (
     "username" VARCHAR (80) UNIQUE NOT NULL,
     "password" VARCHAR (1000) NOT NULL
 );
+CREATE TABLE "artists" (
+	"id" SERIAL PRIMARY KEY,
+	"artist_name" VARCHAR (160) NOT NULL,
+	"user_id" INT REFERENCES "user"("id")
+);
+CREATE TABLE "albums" (
+	"id" SERIAL PRIMARY KEY,
+	"album_title" VARCHAR (160) NOT NULL,
+	"artist_id" INT REFERENCES "artists"("id"),
+	"year_published" INT,
+	"copy_type" VARCHAR (60),
+	"track_listing" VARCHAR (500),
+	"user_id" INT REFERENCES "user"("id")
+); 
+CREATE TABLE "journals" (
+	"id" SERIAL PRIMARY KEY,
+	"album_id" INT REFERENCES "albums"("id"),
+	"notes" TEXT,
+	"user_id" INT REFERENCES "user"("id")
+);
