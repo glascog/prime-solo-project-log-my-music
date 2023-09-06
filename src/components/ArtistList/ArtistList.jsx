@@ -15,14 +15,23 @@ function ArtistList() {
 
    return (
    <div>
-        <p>This is where Artists will be listed in alphabetical order</p>
-
-            <div>{store.artist.map((item, index) => (
-                <div key={index}>
-                    <p>{item.artist_name}</p>
-                    </div>
+    <table className="artist-table">
+        <thead>
+        <tr>
+        <th>Artist</th>
+        <th>Number of Albums</th>
+        </tr>
+        </thead>
+       
+        <tbody>{store.artist.map((item, index) => (
+                <tr key={index}>
+                    <td>{item.artist_name}</td>
+                    <td>{item.count}</td>
+                </tr>
                 ))}
-            </div>
+        </tbody>
+        
+        </table>
    </div>
    );
 }

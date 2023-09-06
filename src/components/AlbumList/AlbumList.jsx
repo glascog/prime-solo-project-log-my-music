@@ -15,8 +15,7 @@ function AlbumList() {
 
    return (
    <div>
-        <p>This is where Albums will be listed in alphabetical order
-        </p>
+        <p>My Albums</p>
 
             <div>{store.album.map((item, index) => (
                 <div key={index}>
