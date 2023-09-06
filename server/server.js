@@ -29,7 +29,7 @@ app.use(passport.session());
 app.use('/api/user', userRouter);
 app.use('/api/artist', artistRouter);
 app.use('/api/album', albumRouter);
-app.use('/api/artist_detail', artistDetailRouter);
+app.use('/api/artist_detail/', artistDetailRouter);
 app.use('/api/album_detail', albumDetailRouter);
 
 

@@ -91,7 +91,7 @@ function App() {
           <ProtectedRoute
             // logged in shows ArtistDetail else shows LoginPage
             
-            path="/artist_detail/:artistName"
+            path="/artist_detail/:artistId"
           >
             <ArtistDetail />
           </ProtectedRoute>
