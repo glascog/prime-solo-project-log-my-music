@@ -11,17 +11,15 @@ function ArtistDetail() {
     const {artistId} = useParams();
 
     useEffect(() => {
-        dispatch({ type: 'FETCH_ARTIST_DETAIL' });
+        dispatch({ type: 'FETCH_ARTIST_DETAIL', payload: Number(artistId) });
     }, [dispatch]);
 
     return (
     <>
-    <div>{store.artistDetail.artistId}</div>
+    <div>{store.artistDetail[0].artist_name}</div>
     </>
 
     )
-
-
 }
 
-export default ArtistDetail
+export default ArtistDetail;
