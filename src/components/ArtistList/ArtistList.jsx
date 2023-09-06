@@ -1,7 +1,8 @@
 import React from "react";
+import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import useReduxStore from '../../hooks/useReduxStore';
-import { useEffect } from "react";
+
 
 function ArtistList() {
 

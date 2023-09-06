@@ -12,7 +12,7 @@ import artist from './artist.reducer';
 const rootReducer = combineReducers({
   errors, // contains registrationMessage and loginMessage
   user, // will have an id and username if someone is logged in
-  artist, // contains a list of user's artists
+  artist, // contains a list of the user's artists
 });
 
 export default rootReducer;
