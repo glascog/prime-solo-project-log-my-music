@@ -15,14 +15,26 @@ function AlbumList() {
 
    return (
    <div>
-        <p>My Albums</p>
+    <table className="album-table">
+        <thead>
+        <tr>
+        <th>Album Title</th>
+        <th>Artist Name</th>
+        <th>Add Note</th>
+        </tr>
+        </thead>
 
-            <div>{store.album.map((item, index) => (
-                <div key={index}>
-                    <p>{item.album_title} by {item.artist_name}</p>
-                    </div>
+            <tbody>{store.album.map((item, index) => (
+                <tr key={index}>
+                    <td>{item.album_title}</td>
+                    <td>{item.artist_name}</td>
+                    <td><button>Add Note</button></td>
+                </tr>
             ))}
-        </div>
+        </tbody>
+       
+
+    </table>
    </div>
    );
 }
