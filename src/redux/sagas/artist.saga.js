@@ -10,7 +10,7 @@ function* fetchArtistList() {
             withCredentials: true,
         };
         const response = yield axios.get('/api/artist', config);
-        yield put({ type: 'SET_ARTIST_LIST', payload: response.data});
+        yield put({ type: 'SET_ARTIST_LIST', payload: response.data });
     } catch (error) {
         console.log('fetchArtistList get request failed', error)
     }
