@@ -24,7 +24,7 @@ function ArtistList() {
                 ))}
             </div>
    </div>
-   )
+   );
 }
 
 export default ArtistList;

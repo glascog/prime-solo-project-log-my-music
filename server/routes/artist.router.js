@@ -9,7 +9,8 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 router.get('/', rejectUnauthenticated, (req, res) => {
   console.log('inside api/artist GET route');
   console.log('user', req.user);
-  let queryText = `SELECT * FROM "artists"`;
+  let queryText = `SELECT * FROM "artists"
+                    ORDER BY "artist_name" ASC`;
   pool.query(queryText).then((result) => {
     res.send(result.rows);
   }) .catch((error) => {

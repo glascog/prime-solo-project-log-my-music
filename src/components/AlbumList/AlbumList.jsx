@@ -15,10 +15,17 @@ function AlbumList() {
 
    return (
    <div>
-        <div>This is where Albums will be listed in alphabetical order
+        <p>This is where Albums will be listed in alphabetical order
+        </p>
+
+            <div>{store.album.map((item, index) => (
+                <div key={index}>
+                    <p>{item.album_title} by {item.artist_name}</p>
+                    </div>
+            ))}
         </div>
    </div>
-   )
+   );
 }
 
 export default AlbumList;
