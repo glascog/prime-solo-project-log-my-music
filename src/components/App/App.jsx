@@ -21,6 +21,8 @@ import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import ArtistList from '../ArtistList/ArtistList';
 import AlbumList from '../AlbumList/AlbumList';
+import ArtistDetail from '../ArtistDetail/ArtistDetail';
+import AlbumDetail from '../AlbumDetail/AlbumDetail';
 
 import './App.css';
 
@@ -84,6 +86,22 @@ function App() {
             path="/albums"
           >
             <AlbumList />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows ArtistDetail else shows LoginPage
+            
+            path="/artist_detail/:artistName"
+          >
+            <ArtistDetail />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows AlbumDetail else shows LoginPage
+            exact
+            path="/album_detail"
+          >
+            <AlbumDetail />
           </ProtectedRoute>
 
           <Route

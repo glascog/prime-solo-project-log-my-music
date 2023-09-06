@@ -2,6 +2,7 @@ import React from "react";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import useReduxStore from '../../hooks/useReduxStore';
+import { Link } from "react-router-dom";
 
 
 function ArtistList() {
@@ -25,7 +26,8 @@ function ArtistList() {
        
         <tbody>{store.artist.map((item, index) => (
                 <tr key={index}>
-                    <td>{item.artist_name}</td>
+                    <td>
+                        <Link to={`/artist_detail/${item.artist_name}`}>{item.artist_name}</Link></td>
                     <td>{item.count}</td>
                 </tr>
                 ))}

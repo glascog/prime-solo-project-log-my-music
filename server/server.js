@@ -11,7 +11,8 @@ const passport = require('./strategies/user.strategy');
 const userRouter = require('./routes/user.router');
 const artistRouter = require('./routes/artist.router');
 const albumRouter = require('./routes/album.router');
-
+const artistDetailRouter = require('./routes/artist_detail.router');
+const albumDetailRouter = require('./routes/album_detail.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -28,6 +29,9 @@ app.use(passport.session());
 app.use('/api/user', userRouter);
 app.use('/api/artist', artistRouter);
 app.use('/api/album', albumRouter);
+app.use('/api/artist_detail', artistDetailRouter);
+app.use('/api/album_detail', albumDetailRouter);
+
 
 // Serve static files
 app.use(express.static('build'));

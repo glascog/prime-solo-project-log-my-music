@@ -28,3 +28,4 @@ CREATE TABLE "journals" (
 	"notes" TEXT,
 	"user_id" INT REFERENCES "user"("id")
 );
+
