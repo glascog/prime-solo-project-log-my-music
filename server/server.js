@@ -13,6 +13,7 @@ const artistRouter = require('./routes/artist.router');
 const albumRouter = require('./routes/album.router');
 const artistDetailRouter = require('./routes/artist_detail.router');
 const albumDetailRouter = require('./routes/album_detail.router');
+const addAlbumRouter = require('./routes/add_album.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -31,6 +32,7 @@ app.use('/api/artist', artistRouter);
 app.use('/api/album', albumRouter);
 app.use('/api/artist_detail', artistDetailRouter);
 app.use('/api/album_detail', albumDetailRouter);
+app.use('/api/add_album', addAlbumRouter);
 
 
 // Serve static files
