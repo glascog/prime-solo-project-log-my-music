@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import useReduxStore from '../../hooks/useReduxStore';
 
 
-function AlbumDetail() {
+function AlbumDetail({title}) {
 
     // const dispatch = useDispatch();
     // const store = useReduxStore();
@@ -14,9 +14,9 @@ function AlbumDetail() {
     // }, [dispatch]);
 
     return (
-    <>
-    
-    </>
+    <div className="artist_detail_card">
+        <h2>{title}</h2>
+    </div>
 
     )
 
