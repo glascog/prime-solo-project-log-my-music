@@ -17,7 +17,7 @@ function AlbumDetail() {
 
     return (
     <div className="artist_detail_card">
-        <h2>{albumTitle}</h2>
+        <h2>{title}</h2>
     </div>
 
     )
