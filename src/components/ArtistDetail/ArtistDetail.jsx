@@ -9,30 +9,31 @@ function ArtistDetail() {
 
     const dispatch = useDispatch();
     const store = useReduxStore();
-    const { artistId } = useParams();
-
-    // const artistDetail = store.artistDetail
+    const {artistId} = useParams();
+    
 
     useEffect(() => {
         dispatch({ type: 'FETCH_ARTIST_DETAIL', payload: Number(artistId) });
     }, [dispatch]);
 
+    
 
-
-    return <>
-
+    return ( <>
+  
         <div>{store.artistDetail[0]?.artist_name}</div>
-        <section className="albums"> */}
-{/* 
-            {/* {/* <div>{store.artistDetail.map(({ album_title }) => (
-                <div key={album_title}>
-                    <AlbumDetail title={album_title} />
-                </div>
-            ))}
+            <section className="albums">
+            
+            <div>{store.artistDetail.map(({album_title}) => (
+                <Link key={album_title} to={`/album_detail/${album_title.id}`}> 
+                        {album_title}</Link> 
+                ))}
             </div>
-        </section>
-    </> */} 
-    {/* )
-} */}
+
+            </section>
+       
+        
+        </>
+    )
+}
 
 export default ArtistDetail;
