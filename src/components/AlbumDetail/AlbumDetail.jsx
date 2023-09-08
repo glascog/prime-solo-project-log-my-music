@@ -2,11 +2,9 @@ import React from "react";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import useReduxStore from '../../hooks/useReduxStore';
-import { useParams } from "react-router-dom";
 
-function AlbumDetail() {
 
-    const albumTitle = useParams();
+function AlbumDetail({title}) {
 
     // const dispatch = useDispatch();
     // const store = useReduxStore();
@@ -17,7 +15,7 @@ function AlbumDetail() {
 
     return (
     <div className="artist_detail_card">
-        <h2>{albumTitle}</h2>
+        <h2>{title}</h2>
     </div>
 
     )
