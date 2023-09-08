@@ -23,6 +23,7 @@ import ArtistList from '../ArtistList/ArtistList';
 import AlbumList from '../AlbumList/AlbumList';
 import ArtistDetail from '../ArtistDetail/ArtistDetail';
 import AlbumDetail from '../AlbumDetail/AlbumDetail';
+import AddAlbum from '../AddAlbum/AddAlbum';
 
 import './App.css';
 
@@ -102,6 +103,14 @@ function App() {
             path="/album_detail"
           >
             <AlbumDetail />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows AlbumDetail else shows LoginPage
+            exact
+            path="/add_album"
+          >
+            <AddAlbum />
           </ProtectedRoute>
 
           <Route

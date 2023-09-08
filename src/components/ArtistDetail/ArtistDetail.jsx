@@ -24,8 +24,9 @@ function ArtistDetail() {
   
         <div>{store.artistDetail[0]?.artist_name}</div>
             <section className="albums">
+            
             <div>{store.artistDetail?.map(({album_title}) => (
-                album_title))}
+               album_title))} 
             </div>
 
             </section>
