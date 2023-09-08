@@ -25,8 +25,8 @@ router.post("/", rejectUnauthenticated, (req, res) => {
     req.body.year_published,
     req.body.copy_type,
     req.body.track_listing,
-    req.user.id,
-  ];
+  ]
+
   const queryText =
     `INSERT INTO "albums" ("artist_name", "album_title", "year_published", "copy_type", "track_listing") VALUES ($1, $2, $3, $4, $5);`
   pool
