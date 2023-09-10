@@ -30,9 +30,23 @@ CREATE TABLE "journals" (
 	"user_id" INT REFERENCES "user"("id")
 );
 
-1	Live Dead	Grateful Dead	1969	Vinyl	Dark Star, St. Stephen, The Eleven, Lovelight, DDHNM, Feedback, And We Bid You Goodnight	
-2	Workingman's Dead	Grateful Dead	1970	Vinyl	Uncle John's Band, High Time, Dire Wolf, New Speedway Boogie, Cumberland Blues, Black Peter, Easy Wind, Casey Jones	
-3	American Beauty	Grateful Dead	1970	Vinyl	Box of Rain, Friend of the Devil, Sugar Magnolia, Operator, Candyman, Ripple, Brokedown Palace, Till the Morning Comes, Attics of my Life	
-4	Chocolate and Cheese	Ween	1994	CD	Take Me Away, Spinal Menengitis, Freedom of 76, I Cant Put my finger on it, A Tear for Eddie, Roses are Free, Baby Bitch, Mister Would You Please help My Pony?, Drifter in the Dark, Voodoo Lady, Joppa Road, Candi, Buenas Tardes Amigo, The HIV Song, What Deaner was Talkin' About, Dont Shit where you eat	
-5	The Mollusk	Ween	1997	CD	I'm Dancing In the Show Tonight, The Mollusk, Polka Dot Tail, I'll Be Your Johnny on the Spot, Mutilated Lips, The Blarney Stone, Its Gonna Be (Alright), The Golden Eel, Cold Blows the Wind, Pink Eye-On My Leg, Waving My Dick in The Wind, Buckingham Green, Ocean Man, She Wanted to Leave 	
-6	A Deeper Understanding	The War On Drugs	2017	vinyl	Good Stuff	
+   // Check if the artist already exists
+   const checkArtistQuery = `SELECT id FROM artists WHERE artist_name = \$1`;
+   const checkArtistResult = await connection.query(checkArtistQuery, [artist_name]);
+
+   if (checkArtistResult.rows.length > 0) {
+     // Artist already exists, retrieve the existing artist ID
+     const artistId = checkArtistResult.rows[0].id;
+     // Use the existing artist ID to add the new album
+     const addNewAlbum = `INSERT INTO albums (artist_id, album_title, year_published, copy_type, track_listing) VALUES (\$1, \$2, \$3, \$4, \$5);`;
+     await connection.query(addNewAlbum, [artistId, album_title, year_published, copy_type, track_listing]);
+   } else {
+     // Artist does not exist, insert a new artist entry
+     const sqlAddArtist = `INSERT INTO artists (artist_name) VALUES (\$1) RETURNING id`;
+     const result = await connection.query(sqlAddArtist, [artist_name]);
+     const artistId = result.rows[0].id;
+     // Use the newly inserted artist ID to add the new album
+     const addNewAlbum = `INSERT INTO albums (artist_id, album_title, year_published, copy_type, track_listing) VALUES (\$1, \$2, \$3, \$4, \$5);`;
+     await connection.query(addNewAlbum, [artistId, album_title, year_published, copy_type, track_listing]);
+   }
+	

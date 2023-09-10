@@ -15,29 +15,35 @@ router.get("/", (req, res) => {
 /**
  * POST new album to database
  */
-router.post("/", rejectUnauthenticated, (req, res) => {
+router.post("/", rejectUnauthenticated, async (req, res) => {
   console.log("inside /api/add_album POST route");
   console.log("req.body:", req.body);
 
-  const queryValues = [
-    req.body.artist_name,
-    req.body.album_title,
-    req.body.year_published,
-    req.body.copy_type,
-    req.body.track_listing,
-  ]
+  const artist_name = req.body.artist_name;
+  const album_title = req.body.album_title;
+  const year_published = req.body.year_published;
+  const copy_type = req.body.copy_type;
+  const track_listing = req.body.track_listing;
 
-  const queryText =
-    `INSERT INTO "albums" ("artist_name", "album_title", "year_published", "copy_type", "track_listing") VALUES ($1, $2, $3, $4, $5);`
-  pool
-    .query(queryText, queryValues)
-    .then((result) => {
-      res.sendStatus(200);
-    })
-    .catch((error) => {
-      console.log(error);
-      res.sendStatus(500);
-    });
+  const connection = await pool.connect()
+  try {
+    await connection.query('BEGIN');
+    const sqlAddArtist = `INSERT INTO artists (artist_name) VALUES ($1) RETURNING id`;
+    const result = await connection.query( sqlAddArtist, [artist_name]);
+    // get the artist id from the result
+    const artistId = result.rows[0].id;
+    // use the artis id to add a new album
+    const addNewAlbum = `INSERT INTO albums (artist_id, album_title, year_published, copy_type, track_listing) VALUES ($1, $2, $3, $4, $5);`
+    await connection.query( addNewAlbum, [artistId, album_title, year_published, copy_type, track_listing]);
+    await connection.query('COMMIT');
+    res.sendStatus(200);
+  } catch(error) {
+    await connection.query('ROLLBACK');
+    console.log('Error adding new album - Rolling back catalog', error);
+    res.sendStatus(500);
+  } finally {
+    connection.release()
+  }
 });
 
 module.exports = router;
