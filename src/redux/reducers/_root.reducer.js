@@ -4,6 +4,7 @@ import user from './user.reducer';
 import artist from './artist.reducer';
 import album from './album.reducer';
 import artistDetail from './artist_detail.reducer';
+import albumDetail from './album_detail.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   artist, // contains a list of the user's artists
   album, // contains a list of the user's albums
   artistDetail, // contains a list of albums that correspond to each artist
+  albumDetail, // contains detail about a particular album
 });
 
 export default rootReducer;

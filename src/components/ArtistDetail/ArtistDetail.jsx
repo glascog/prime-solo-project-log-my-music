@@ -19,7 +19,6 @@ function ArtistDetail() {
 
 
 
-
     return (<>
 
         <div>{store.artistDetail[0]?.artist_name}</div>

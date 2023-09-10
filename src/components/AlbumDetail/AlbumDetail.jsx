@@ -12,11 +12,15 @@ function AlbumDetail() {
     const { albumId } = useParams();
 
     useEffect(() => {
-        dispatch({ type: 'FETCH_ALBUM_DETAIL', payload: Number });
+        dispatch({ type: 'FETCH_ALBUM_DETAIL', payload: Number(albumId) });
     }, [dispatch]);
 
     return (
     <>
+    <div>{store.albumDetail}
+
+
+    </div>
     
     </>
 

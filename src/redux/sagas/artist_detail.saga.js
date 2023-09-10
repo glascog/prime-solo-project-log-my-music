@@ -1,7 +1,5 @@
 import axios from "axios";
-import { put, select, takeLatest } from 'redux-saga/effects';
-import useReduxStore from "../../hooks/useReduxStore";
-
+import { put, takeLatest } from 'redux-saga/effects';
 
 // This worker saga will fire upon all "FETCH_ARTIST_DETAIL" actions
 function* fetchArtistDetail(action) {
@@ -13,7 +11,6 @@ function* fetchArtistDetail(action) {
             headers: {'Content-Type': 'application/json'},
             withCredentials: true,
         };
-        // const id = action.payload.id
         const response = yield axios.get(`/api/artist_detail/${artistId}`, config);
         yield put({ type: 'SET_ARTIST_DETAIL', payload: response.data });
     } catch (error) {
