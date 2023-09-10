@@ -100,7 +100,7 @@ function App() {
           <ProtectedRoute
             // logged in shows AlbumDetail else shows LoginPage
             exact
-            path="/album_detail"
+            path="/album_detail/:albumId"
           >
             <AlbumDetail />
           </ProtectedRoute>
