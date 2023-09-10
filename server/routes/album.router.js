@@ -11,6 +11,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
   console.log('user', req.user);
   let queryText = `SELECT "album_title", "artist_name" 
                     FROM "albums"
+                    JOIN "artists" ON albums.artist_id = artists.id
                     ORDER BY "album_title" ASC;`;
   pool.query(queryText).then((result) => {
     res.send(result.rows);
