@@ -2,18 +2,26 @@ import React from "react";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import useReduxStore from '../../hooks/useReduxStore';
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 
 
 function AlbumDetail() {
 
     const dispatch = useDispatch();
+    const history = useHistory();
     const store = useReduxStore();
     const { albumId } = useParams();
 
     useEffect(() => {
         dispatch({ type: 'FETCH_ALBUM_DETAIL', payload: Number(albumId) });
     }, [dispatch]);
+
+    function handleEditAlbum() {
+        // dispatch to store album info in redux
+        dispatch({ type: 'SET_EDIT_ALBUM', payload: store.albumDetail});
+        // route to edit form
+        history.push('/edit_album');
+    }
 
     return (
         <>
@@ -39,7 +47,7 @@ function AlbumDetail() {
                             <td>{store.albumDetail[0]?.track_listing}</td>
                         </tr>
                         <tr>
-                            <td><button>Edit Album Info</button>
+                            <td><button onClick={handleEditAlbum}>Edit Album Info</button>
                             <button>Delete Album</button></td>
                         </tr>
 

@@ -21,6 +21,10 @@ function ArtistDetail() {
 
     return (<>
 
+        <div>
+            <Link to='/add_album'><button>Add Album</button></Link>
+        </div>
+
         <div>{store.artistDetail[0]?.artist_name}</div>
         <section className="albums">
 

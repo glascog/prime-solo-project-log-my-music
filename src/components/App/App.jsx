@@ -24,6 +24,7 @@ import AlbumList from '../AlbumList/AlbumList';
 import ArtistDetail from '../ArtistDetail/ArtistDetail';
 import AlbumDetail from '../AlbumDetail/AlbumDetail';
 import AddAlbum from '../AddAlbum/AddAlbum';
+import EditAlbum from '../EditAlbum/EditAlbum';
 
 import './App.css';
 
@@ -111,6 +112,14 @@ function App() {
             path="/add_album"
           >
             <AddAlbum />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows AlbumDetail else shows LoginPage
+            exact
+            path="/edit_album"
+          >
+            <EditAlbum />
           </ProtectedRoute>
 
           <Route
