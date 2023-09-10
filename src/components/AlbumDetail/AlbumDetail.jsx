@@ -16,13 +16,38 @@ function AlbumDetail() {
     }, [dispatch]);
 
     return (
-    <>
-    <div>{store.albumDetail}
+        <>
+            <div>
+                <table className="album-id-table">
+                    <thead>
+                        <tr>
+                            <th>{store.albumDetail[0]?.artist_name}</th>
+                        </tr>
+                    </thead>
 
+                    <tbody>
+                        <tr>
+                            <td>{store.albumDetail[0]?.album_title}</td>
+                        </tr>
+                        <tr>
+                            <td>{store.albumDetail[0]?.year_published}</td>
+                        </tr>
+                        <tr>
+                            <td>{store.albumDetail[0]?.copy_type}</td>
+                        </tr>
+                        <tr>
+                            <td>{store.albumDetail[0]?.track_listing}</td>
+                        </tr>
+                        <tr>
+                            <td><button>Edit Album Info</button>
+                            <button>Delete Album</button></td>
+                        </tr>
 
-    </div>
-    
-    </>
+                    </tbody>
+                </table>
+
+            </div>
+        </>
 
     )
 
