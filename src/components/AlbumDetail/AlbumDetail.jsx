@@ -84,15 +84,12 @@ function AlbumDetail() {
                     <tbody>{store.albumNotes.map((notes, index) => (
                         <tr key={index}>
                             <td>{notes.notes}</td>
-                            <td>
-                            <Link to={`/add_notes/${albumId}`}><button>Add Notes</button></Link></td>
                         </tr>
                     ))}
                     </tbody>
-
-
-
                 </table>
+
+                <Link to={`/add_notes/${store.albumDetail[0].id}`}><button>Add Notes</button></Link>
 
             </div>
         </>
