@@ -48,7 +48,7 @@ function EditAlbum() {
         axios.put(`/api/album/${editAlbum[0]?.id}`, editAlbum)
             .then(response => {
                 dispatch({ type: 'EDIT_CLEAR' });
-                // history.push('/albums')
+                history.push('/albums')
             })
             .catch(error => {
                 console.log('error on put:', error);

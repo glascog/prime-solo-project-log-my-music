@@ -6,11 +6,6 @@ const editAlbum = (state = {}, action) => {
         ...state,
         [action.payload.property]: action.payload.value,
     }
-  // } else if(action.type === 'EDIT_YEAR_PUBLISHED') {
-  //   return {
-  //     ...state,
-  //     [action.payload.property]: action.payload.value,
-  //   }
   } else if(action.type === 'EDIT_CLEAR') {
     return { album_title: '', year_published: ''};
   }

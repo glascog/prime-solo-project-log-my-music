@@ -51,10 +51,15 @@ router.put("/:id", rejectUnauthenticated, (req, res) => {
   console.log("req.params.id is:", req.params.id);
   console.log('req.body is:', req.body)
 
+  const albumTitle = req.body.album_title || '';
+  const yearPublished = req.body.year_published || null;
+  const copyType = req.body.copy_type || '';
+  const trackList = req.body.track_listing || '';
 
-  const queryText = `UPDATE albums SET album_title = $1, year_published = $2 WHERE id = $3;`;
+
+  const queryText = `UPDATE albums SET album_title = $1, year_published = $2, copy_type = $3, track_listing = $4 WHERE id = $5;`;
   pool
-    .query(queryText, [req.body.album_title, req.body.year_published, req.params.id])
+    .query(queryText, [albumTitle, yearPublished, copyType, trackList, req.params.id])
     .then((result) => {
       res.sendStatus(200);
     })
@@ -62,8 +67,6 @@ router.put("/:id", rejectUnauthenticated, (req, res) => {
       console.log('Error on year change put request', error);
       res.sendStatus(500);
     })
-
-  
 });
 
 router.delete("/:id", rejectUnauthenticated, (req, res) => {

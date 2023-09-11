@@ -30,7 +30,6 @@ function AlbumDetail() {
     const handleDeleteAlbum = (props) => {
         let albumId = props.id;
 
-
         const confirmDelete = window.confirm("Are you sure you want to delete this album?");
 
         if (confirmDelete) {
