@@ -25,7 +25,7 @@ function AlbumDetail() {
         dispatch({ type: 'SET_EDIT_ALBUM', payload: store.albumDetail });
         // route to edit form
         history.push(`/edit_album`);
-    }
+    };
 
     const handleDeleteAlbum = (props) => {
         let albumId = props.id;
@@ -44,6 +44,11 @@ function AlbumDetail() {
                 })
         }
     };
+
+    const handleEditNote = () => {
+        dispatch({ type: 'SET_EDIT_NOTE', payload: store.albumNotes });
+        history.push(`/edit_note`);
+    }
 
     return (
         <>
@@ -84,12 +89,13 @@ function AlbumDetail() {
                     <tbody>{store.albumNotes.map((notes, index) => (
                         <tr key={index}>
                             <td>{notes.notes}</td>
+                            <td><button onClick={() => handleEditNote(notes.notes)}>Edit Note</button></td>
                         </tr>
                     ))}
                     </tbody>
                 </table>
 
-                <Link to={`/add_notes/${store.albumDetail[0].id}`}><button>Add Notes</button></Link>
+                <Link to={`/add_notes/${store.albumDetail[0]?.id}`}><button>Add Notes</button></Link>
 
             </div>
         </>

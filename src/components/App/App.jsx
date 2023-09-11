@@ -26,6 +26,7 @@ import AlbumDetail from '../AlbumDetail/AlbumDetail';
 import AddAlbum from '../AddAlbum/AddAlbum';
 import AddNotes from '../AddNotes/AddNotes';
 import EditAlbum from '../EditAlbum/EditAlbum';
+import EditNote from '../EditNote/EditNote';
 
 import './App.css';
 
@@ -129,6 +130,14 @@ function App() {
             path="/edit_album"
           >
             <EditAlbum />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows AlbumDetail else shows LoginPage
+            exact
+            path="/edit_note"
+          >
+            <EditNote />
           </ProtectedRoute>
 
           <Route

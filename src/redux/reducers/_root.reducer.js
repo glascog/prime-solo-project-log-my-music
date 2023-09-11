@@ -7,6 +7,7 @@ import artistDetail from './artist_detail.reducer';
 import albumDetail from './album_detail.reducer';
 import editAlbum from './edit_album.reducer';
 import albumNotes from './album_notes.reducer';
+import editNote from './edit_note.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
   albumDetail, // contains detail about a particular album
   editAlbum, // contains edited info about an album
   albumNotes, // contains all notes in DB on an album
+  editNote, 
 });
 
 export default rootReducer;

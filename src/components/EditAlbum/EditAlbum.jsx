@@ -12,7 +12,7 @@ function EditAlbum() {
     const history = useHistory();
     const editAlbum = useSelector((store) => store.editAlbum);
 
-    function handleTitleChange(event) {
+    const handleTitleChange = (event) => {
         event.preventDefault();
         dispatch({
             type: 'EDIT_ALBUM',
@@ -20,31 +20,31 @@ function EditAlbum() {
         });
     }
 
-    function handleYearChange(event) {
+    const handleYearChange = (event) => {
         dispatch({
             type: 'EDIT_ALBUM',
             payload: { property: 'year_published', value: event.target.value }
         });
     }
 
-    function handleCopyChange(event) {
+    const handleCopyChange = (event) => {
         dispatch({
             type: 'EDIT_ALBUM',
             payload: { property: 'copy_type', value: event.target.value }
         });
     }
 
-    function handleTrackListChange(event) {
+    const handleTrackListChange = (event) => {
         dispatch({
             type: 'EDIT_ALBUM',
             payload: { property: 'track_listing', value: event.target.value }
         });
     }
 
-    function handleSubmit(event) {
+    const handleSubmit = (event) => {
         event.preventDefault();
 
-        // put request for updating album title to /album_detail/:id
+        // put request for updating album title to /album/:id
         axios.put(`/api/album/${editAlbum[0]?.id}`, editAlbum)
             .then(response => {
                 dispatch({ type: 'EDIT_CLEAR' });
