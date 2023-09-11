@@ -48,6 +48,23 @@ function EditAlbum() {
                 value={editAlbum.album_title}
             />
 
+            {/* <input 
+                onChange={(event) => handleChange(event)}
+                placeholder='Year Published'
+                value={editAlbum.year_published}
+            />
+
+            <input 
+                onChange={(event) => handleChange(event)}
+                placeholder='Copy Type'
+                value={editAlbum.copy_type}
+            />
+
+<input 
+                onChange={(event) => handleChange(event)}
+                placeholder='Track List'
+                value={editAlbum.track_listing}
+            /> */}
             <input type='submit' value='Update Album' />
 
         </form>

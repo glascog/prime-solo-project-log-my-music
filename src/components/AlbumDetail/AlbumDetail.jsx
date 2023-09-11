@@ -26,6 +26,10 @@ function AlbumDetail() {
 
     const handleDeleteAlbum = (props) => {
         let albumId = props.id;
+
+        const confirmDelete = window.confirm("Are you sure you want to delete this album?");
+
+        if(confirmDelete) {
         axios.delete(`/api/album/${albumId}`)
             .then(response => {
                 console.log('delete worked!', response)
@@ -35,6 +39,7 @@ function AlbumDetail() {
             .catch(error => {
                 console.log('error deleting album:', error)
             })
+        }
     };
 
     return (
