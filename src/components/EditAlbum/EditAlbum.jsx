@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import useReduxStore from '../../hooks/useReduxStore';
-import editAlbum from '../../redux/reducers/edit_album.reducer';
 
 
 function EditAlbum() {
@@ -13,24 +12,43 @@ function EditAlbum() {
     const history = useHistory();
     const editAlbum = useSelector((store) => store.editAlbum);
 
-    //    console.log('editAlbum[0].id is:', editAlbum[0]?.id)
-
-    function handleChange(event) {
+    function handleTitleChange(event) {
         event.preventDefault();
         dispatch({
-                type: 'EDIT_ALBUM_TITLE', 
-                payload: { property: 'album_title', value: event.target.value }
+            type: 'EDIT_ALBUM',
+            payload: { property: 'album_title', value: event.target.value }
+        });
+    }
+
+    function handleYearChange(event) {
+        dispatch({
+            type: 'EDIT_ALBUM',
+            payload: { property: 'year_published', value: event.target.value }
+        });
+    }
+
+    function handleCopyChange(event) {
+        dispatch({
+            type: 'EDIT_ALBUM',
+            payload: { property: 'copy_type', value: event.target.value }
+        });
+    }
+
+    function handleTrackListChange(event) {
+        dispatch({
+            type: 'EDIT_ALBUM',
+            payload: { property: 'track_listing', value: event.target.value }
         });
     }
 
     function handleSubmit(event) {
         event.preventDefault();
 
-        // put request to /album_detail/:id
+        // put request for updating album title to /album_detail/:id
         axios.put(`/api/album/${editAlbum[0]?.id}`, editAlbum)
             .then(response => {
                 dispatch({ type: 'EDIT_CLEAR' });
-                history.push('/albums')
+                // history.push('/albums')
             })
             .catch(error => {
                 console.log('error on put:', error);
@@ -39,37 +57,43 @@ function EditAlbum() {
 
     return (<>
         <h2>Edit Album</h2>
-        {/* <p>We are editing this album: {editAlbum[0]?.album_title} with id: {editAlbum[0]?.id}</p> */}
 
-        <form onSubmit={handleSubmit}>
-            <input 
-                onChange={(event) => handleChange(event)}
+        <form onSubmit={(event) => handleSubmit(event)}>
+            <input
+                onChange={(event) => handleTitleChange(event)}
                 placeholder='Album Title'
                 value={editAlbum.album_title}
             />
 
-            {/* <input 
-                onChange={(event) => handleChange(event)}
-                placeholder='Year Published'
-                value={editAlbum.year_published}
-            />
+            <select
+                onChange={(event) => handleYearChange(event)}
+                value={editAlbum.year_published}>
+                <option value='' disabled>Year Published</option>
+                {Array.from({ length: new Date().getFullYear() - 1900 }, (_, i) => i + 1900).map(year => (
+                    <option key={year} value={year}>{year}</option>))}
+            </select>
 
-            <input 
-                onChange={(event) => handleChange(event)}
-                placeholder='Copy Type'
-                value={editAlbum.copy_type}
-            />
+            <select
+                onChange={(event) => handleCopyChange(event)}
+                value={editAlbum.copy_type}>
+                <option value='' disabled>Copy Type</option>
+                <option value="vinyl">Vinyl</option>
+                <option value="cd">CD</option>
+                <option value="cassette">Cassette</option>
+                <option value="digital">Digital</option>
+                <option value="other">Other</option>
+            </select>
 
-<input 
-                onChange={(event) => handleChange(event)}
+            <input onChange={(event) => handleTrackListChange(event)}
                 placeholder='Track List'
                 value={editAlbum.track_listing}
-            /> */}
-            <input type='submit' value='Update Album' />
+            />
 
+            <input type='submit' value='Update Album' />
         </form>
     </>
-    );
+    )
+
 }
 
 export default EditAlbum;

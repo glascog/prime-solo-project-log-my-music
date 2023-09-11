@@ -52,7 +52,7 @@ function AddAlbum() {
             <option value='' disabled>Year Published</option>
             {Array.from({length: new Date().getFullYear() - 1900}, (_, i) => i + 1900).map(year => (
             <option key={year} value={year}>{year}</option>))}
-            </select>     
+    </select>     
     <select onChange={(event) => setCopy(event.target.value)} value={copy}>
             <option value='' disabled>Copy Type</option>
             <option value="vinyl">Vinyl</option>

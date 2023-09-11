@@ -2,7 +2,7 @@ import React from "react";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import useReduxStore from '../../hooks/useReduxStore';
-import { useParams, useHistory } from "react-router-dom";
+import { useParams, useHistory, Link } from "react-router-dom";
 import axios from "axios";
 
 
@@ -20,11 +20,11 @@ function AlbumDetail() {
         dispatch({ type: 'FETCH_ALBUM_NOTES', payload: Number(albumId) })
     }, [dispatch]);
 
-    function handleEditAlbum() {
+   const handleEditAlbum = (props) => {
         // dispatch to store album info in redux
         dispatch({ type: 'SET_EDIT_ALBUM', payload: store.albumDetail });
         // route to edit form
-        history.push('/edit_album');
+        history.push(`/edit_album`);
     }
 
     const handleDeleteAlbum = (props) => {
@@ -70,7 +70,7 @@ function AlbumDetail() {
                             <td>{store.albumDetail[0]?.track_listing}</td>
                         </tr>
                         <tr>
-                            <td><button onClick={handleEditAlbum}>Edit Album Info</button>
+                            <td><button onClick={() => handleEditAlbum(store.albumDetail[0])}>Edit Album Info</button>
                                 <button onClick={() => handleDeleteAlbum(store.albumDetail[0])}>Delete Album</button></td>
                         </tr>
                     </tbody>
@@ -85,6 +85,8 @@ function AlbumDetail() {
                     <tbody>{store.albumNotes.map((notes, index) => (
                         <tr key={index}>
                             <td>{notes.notes}</td>
+                            <td>
+                            <Link to={`/add_notes/${albumId}`}><button>Add Notes</button></Link></td>
                         </tr>
                     ))}
                     </tbody>

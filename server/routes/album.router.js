@@ -49,17 +49,21 @@ router.put("/:id", rejectUnauthenticated, (req, res) => {
   // update this album
   console.log("editAlbum put route");
   console.log("req.params.id is:", req.params.id);
-  // const albumToUpdate = req.params.id;
-  const queryText = `UPDATE albums SET album_title = $1 WHERE id = $2`;
+  console.log('req.body is:', req.body)
+
+
+  const queryText = `UPDATE albums SET album_title = $1, year_published = $2 WHERE id = $3;`;
   pool
-    .query(queryText, [req.body.album_title, req.params.id])
+    .query(queryText, [req.body.album_title, req.body.year_published, req.params.id])
     .then((result) => {
       res.sendStatus(200);
     })
     .catch((error) => {
-      console.log("Error on database put request", error);
+      console.log('Error on year change put request', error);
       res.sendStatus(500);
-    });
+    })
+
+  
 });
 
 router.delete("/:id", rejectUnauthenticated, (req, res) => {
