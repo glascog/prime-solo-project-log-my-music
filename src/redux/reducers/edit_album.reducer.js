@@ -10,7 +10,6 @@ const editAlbum = (state = {}, action) => {
     return { album_title: ''};
   }
   return state;
-  console.log('state:', state)
 };
 
 export default editAlbum;

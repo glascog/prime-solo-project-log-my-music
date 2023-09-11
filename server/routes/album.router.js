@@ -38,6 +38,20 @@ router.put("/:id", rejectUnauthenticated, (req, res) => {
     });
 });
 
+router.delete('/:id', rejectUnauthenticated, (req, res) => {
+  const queryValues = [req.params.id]
+  let queryText = 'DELETE from albums WHERE id = $1';
+  console.log('inside delete router')
+  pool.query(queryText, queryValues)
+    .then((result) => {
+      res.sendStatus(200);
+    })
+    .catch((error) => {
+      console.log(error);
+      res.sendStatus(500);
+    })
+})
+
 /**
  * POST route template
  */

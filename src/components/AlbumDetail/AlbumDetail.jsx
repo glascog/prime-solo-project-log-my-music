@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import useReduxStore from '../../hooks/useReduxStore';
 import { useParams, useHistory } from "react-router-dom";
+import axios from "axios";
 
 
 function AlbumDetail() {
@@ -18,10 +19,23 @@ function AlbumDetail() {
 
     function handleEditAlbum() {
         // dispatch to store album info in redux
-        dispatch({ type: 'SET_EDIT_ALBUM', payload: store.albumDetail});
+        dispatch({ type: 'SET_EDIT_ALBUM', payload: store.albumDetail });
         // route to edit form
         history.push('/edit_album');
     }
+
+    const handleDeleteAlbum = (props) => {
+        let albumId = props.id;
+        axios.delete(`/api/album/${albumId}`)
+            .then(response => {
+                console.log('delete worked!', response)
+                dispatch({ type: 'FETCH_ALBUM_LIST' })
+                history.push('/albums')
+            })
+            .catch(error => {
+                console.log('error deleting album:', error)
+            })
+    };
 
     return (
         <>
@@ -48,7 +62,7 @@ function AlbumDetail() {
                         </tr>
                         <tr>
                             <td><button onClick={handleEditAlbum}>Edit Album Info</button>
-                            <button>Delete Album</button></td>
+                                <button onClick={() => handleDeleteAlbum(store.albumDetail[0])}>Delete Album</button></td>
                         </tr>
 
                     </tbody>
