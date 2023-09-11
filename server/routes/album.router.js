@@ -53,10 +53,23 @@ router.delete('/:id', rejectUnauthenticated, (req, res) => {
 })
 
 /**
- * POST route template
+ * POST new notes to journals table in DB
  */
-router.post('/', (req, res) => {
-  // POST route code here
+router.post('/:id', rejectUnauthenticated, (req, res) => {
+  console.log('inside /api/album post notes route');
+  console.log('req.body is:', req.body);
+  console.log('req.params.id is:', req.params.id)
+
+  const queryValues = [req.params.id, req.body.notes, req.user.id]
+  let queryText = 'INSERT INTO journals (album_id, notes, user_id) VALUES ($1, $2, $3);'
+  pool.query(queryText, queryValues)
+  .then((result) => {
+  res.sendStatus(200)
+})
+  .catch((error) => {
+    console.log(error);
+    res.sendStatus(500);
+  });
 });
 
 module.exports = router;

@@ -37,12 +37,12 @@ function AlbumList() {
                     </tr>
                 </thead>
 
-                <tbody>{store.album.map((item, index, id) => (
+                <tbody>{store.album.map((item, index) => (
                     <tr key={index}>
                         <td>{item.album_title}</td>
                         <td>{item.artist_name}</td>
                         <td>
-                            <Link to={`/add_notes/${id}`}><button>Add Notes</button></Link></td>
+                            <Link to={`/add_notes/${item.album_id}`}><button>Add Notes</button></Link></td>
                     </tr>
                 ))}
                 </tbody>

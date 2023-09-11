@@ -118,7 +118,7 @@ function App() {
           <ProtectedRoute
             // logged in shows AlbumDetail else shows LoginPage
             exact
-            path="/add_notes"
+            path="/add_notes/:albumId"
           >
             <AddNotes />
           </ProtectedRoute>
