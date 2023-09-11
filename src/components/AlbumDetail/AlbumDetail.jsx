@@ -13,8 +13,11 @@ function AlbumDetail() {
     const store = useReduxStore();
     const { albumId } = useParams();
 
+    console.log('store.albumNotes', store.albumNotes)
+
     useEffect(() => {
         dispatch({ type: 'FETCH_ALBUM_DETAIL', payload: Number(albumId) });
+        dispatch({ type: 'FETCH_ALBUM_NOTES', payload: Number(albumId) })
     }, [dispatch]);
 
     function handleEditAlbum() {
@@ -27,18 +30,19 @@ function AlbumDetail() {
     const handleDeleteAlbum = (props) => {
         let albumId = props.id;
 
+
         const confirmDelete = window.confirm("Are you sure you want to delete this album?");
 
-        if(confirmDelete) {
-        axios.delete(`/api/album/${albumId}`)
-            .then(response => {
-                console.log('delete worked!', response)
-                dispatch({ type: 'FETCH_ALBUM_LIST' })
-                history.push('/albums')
-            })
-            .catch(error => {
-                console.log('error deleting album:', error)
-            })
+        if (confirmDelete) {
+            axios.delete(`/api/album/${albumId}`)
+                .then(response => {
+                    console.log('delete worked!', response)
+                    dispatch({ type: 'FETCH_ALBUM_LIST' })
+                    history.push('/albums')
+                })
+                .catch(error => {
+                    console.log('error deleting album:', error)
+                })
         }
     };
 
@@ -69,8 +73,24 @@ function AlbumDetail() {
                             <td><button onClick={handleEditAlbum}>Edit Album Info</button>
                                 <button onClick={() => handleDeleteAlbum(store.albumDetail[0])}>Delete Album</button></td>
                         </tr>
-
                     </tbody>
+                </table>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Journal Entries on {store.albumDetail[0]?.album_title}</th>
+                        </tr>
+                    </thead>
+                    <tbody>{store.albumNotes.map((notes, index) => (
+                        <tr key={index}>
+                            <td>{notes.notes}</td>
+                        </tr>
+                    ))}
+                    </tbody>
+
+
+
                 </table>
 
             </div>

@@ -6,6 +6,7 @@ import artistSaga from './artist.saga';
 import albumSaga from './album.saga';
 import artistDetailSaga from './artist_detail.saga';
 import albumDetailSaga from './album_detail.saga';
+import albumNotesSaga from './album_notes.saga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -23,5 +24,6 @@ export default function* rootSaga() {
     albumSaga(),
     artistDetailSaga(),
     albumDetailSaga(),
+    albumNotesSaga(),
   ]);
 }
