@@ -51,6 +51,24 @@ function AlbumDetail() {
         history.push(`/edit_note/${noteId}`);
     }
 
+    const handleDeleteNote = (props) => {
+        let noteId = props;
+
+        const confirmDelete = window.confirm("Are you sure you want to delete this note?");
+
+        if (confirmDelete) {
+            axios.delete(`/api/album_detail/${props}`)
+                .then(response => {
+                    console.log('delete note worked!', response)
+                    dispatch({ type: 'FETCH_ALBUM_LIST' })
+                    history.push('/albums')
+                })
+                .catch(error => {
+                    console.log('error deleting note:', error)
+                })
+        }
+    };
+
     return (
         <>
             <div>
@@ -90,7 +108,8 @@ function AlbumDetail() {
                     <tbody>{store.albumNotes.map((notes, index) => (
                         <tr key={index}>
                             <td>{notes.notes}</td>
-                            <td><button onClick={() => handleEditNote(notes.id)}>Edit Note</button></td>
+                            <td><button onClick={() => handleEditNote(notes.id)}>Edit Note</button>
+                            <button onClick={() => handleDeleteNote(notes.id)}>Delete Note</button></td>
                         </tr>
                     ))}
                     </tbody>
