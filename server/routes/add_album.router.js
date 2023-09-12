@@ -27,19 +27,19 @@ router.post("/", rejectUnauthenticated, async (req, res) => {
 
   const connection = await pool.connect()
   try {
-    await connection.query('BEGIN');
-    const sqlAddArtist = `INSERT INTO artists (artist_name) VALUES ($1) RETURNING id`;
+    await connection.query('BEGIN;');
+    const sqlAddArtist = `INSERT INTO artists (artist_name) VALUES ($1) RETURNING id;`;
     const result = await connection.query( sqlAddArtist, [artist_name]);
     // get the artist id from the result
     const artistId = result.rows[0].id;
-    // use the artis id to add a new album
+    // use the artist id to add a new album
     const addNewAlbum = `INSERT INTO albums (artist_id, album_title, year_published, copy_type, track_listing) VALUES ($1, $2, $3, $4, $5);`
     await connection.query( addNewAlbum, [artistId, album_title, year_published, copy_type, track_listing]);
-    await connection.query('COMMIT');
+    await connection.query('COMMIT;');
     res.sendStatus(200);
   } catch(error) {
-    await connection.query('ROLLBACK');
-    console.log('Error adding new album - Rolling back catalog', error);
+    await connection.query('ROLLBACK;');
+    console.log('Error adding new album - Rolling back catalog addition', error);
     res.sendStatus(500);
   } finally {
     connection.release()

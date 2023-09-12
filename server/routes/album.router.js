@@ -51,23 +51,38 @@ router.put("/:id", rejectUnauthenticated, (req, res) => {
   console.log("req.params.id is:", req.params.id);
   console.log('req.body is:', req.body)
 
-  const albumTitle = req.body.album_title || '';
-  const yearPublished = req.body.year_published || null;
-  const copyType = req.body.copy_type || '';
-  const trackList = req.body.track_listing || '';
+  const albumTitle = req.body.album_title;
+  const yearPublished = req.body.year_published;
+  const copyType = req.body.copy_type;
+  const trackList = req.body.track_listing;
 
+  // fetch existing values from database
+  const queryText = `SELECT album_title, year_published, copy_type, track_listing FROM albums WHERE id = $1;`;
 
-  const queryText = `UPDATE albums SET album_title = $1, year_published = $2, copy_type = $3, track_listing = $4 WHERE id = $5;`;
   pool
-    .query(queryText, [albumTitle, yearPublished, copyType, trackList, req.params.id])
+    .query(queryText, [req.params.id])
     .then((result) => {
+      const existingData = result.rows[0];
+      const updatedAlbumTitle = albumTitle || existingData.album_title;
+      const updatedYearPublished = yearPublished || existingData.year_published;
+      const updatedCopyType = copyType || existingData.copy_type;
+      const updatedTrackList = trackList || existingData.track_listing;
+
+      // update values in the database
+      const updateQueryText = `UPDATE albums SET album_title = $1, year_published = $2, copy_type = $3, track_listing = $4 WHERE id = $5;`;
+      pool.query(updateQueryText, [updatedAlbumTitle, updatedYearPublished, updatedCopyType, updatedTrackList, req.params.id])
       res.sendStatus(200);
     })
     .catch((error) => {
-      console.log('Error on year change put request', error);
+      console.log('Error on album update', error);
+      res.sendStatus(500);
+    })
+    .catch((error) => {
+      console.log('Error on album fetch', error);
       res.sendStatus(500);
     })
 });
+
 
 router.delete("/:id", rejectUnauthenticated, (req, res) => {
   const queryValues = [req.params.id];
