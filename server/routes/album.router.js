@@ -30,7 +30,7 @@ router.get("/", rejectUnauthenticated, (req, res) => {
 router.get("/:id", rejectUnauthenticated, (req, res) => {
   console.log("inside api/album GET Notes");
   console.log("req.params.id is:", req.params.id);
-  let queryText = `SELECT notes FROM journals
+  let queryText = `SELECT id, notes FROM journals
                     WHERE album_id = $1
                     ORDER by id ASC;`;
   let queryValues = [req.params.id];
@@ -49,7 +49,7 @@ router.put("/:id", rejectUnauthenticated, (req, res) => {
   // update this album
   console.log("editAlbum put route");
   console.log("req.params.id is:", req.params.id);
-  console.log('req.body is:', req.body)
+  console.log('req.body is:', req.body);
 
   const albumTitle = req.body.album_title;
   const yearPublished = req.body.year_published;

@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 
 function EditNote() {
@@ -17,6 +18,15 @@ function EditNote() {
     const handleSubmit = (event) => {
         event.preventDefault();
 
+        // put request for updating album notes
+        axios.put(`/api/album_detail/${editNote[0].id}`, editNote)
+            .then(response => {
+                dispatch({ type: 'EDIT_CLEAR' });
+                history.push('/albums')
+            })
+            .catch(error => {
+                console.log('error on note edit put request:', error)
+            })
     }
 
 

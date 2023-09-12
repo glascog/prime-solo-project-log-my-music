@@ -45,9 +45,10 @@ function AlbumDetail() {
         }
     };
 
-    const handleEditNote = () => {
+    const handleEditNote = (props) => {
+        let noteId = props
         dispatch({ type: 'SET_EDIT_NOTE', payload: store.albumNotes });
-        history.push(`/edit_note`);
+        history.push(`/edit_note/${noteId}`);
     }
 
     return (
@@ -89,7 +90,7 @@ function AlbumDetail() {
                     <tbody>{store.albumNotes.map((notes, index) => (
                         <tr key={index}>
                             <td>{notes.notes}</td>
-                            <td><button onClick={() => handleEditNote(notes.notes)}>Edit Note</button></td>
+                            <td><button onClick={() => handleEditNote(notes.id)}>Edit Note</button></td>
                         </tr>
                     ))}
                     </tbody>

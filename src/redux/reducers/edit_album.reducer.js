@@ -7,7 +7,7 @@ const editAlbum = (state = {}, action) => {
         [action.payload.property]: action.payload.value,
     }
   } else if(action.type === 'EDIT_CLEAR') {
-    return { album_title: '', year_published: ''};
+    return { album_title: '', year_published: '', copy_type: '', track_listing: ''};
   }
 
   return state;

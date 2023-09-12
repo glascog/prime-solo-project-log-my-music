@@ -51,7 +51,7 @@ function EditAlbum() {
                 history.push('/albums')
             })
             .catch(error => {
-                console.log('error on put:', error);
+                console.log('error on album edit put request:', error);
             })
     }
 

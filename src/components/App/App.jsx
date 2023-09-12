@@ -135,7 +135,7 @@ function App() {
           <ProtectedRoute
             // logged in shows AlbumDetail else shows LoginPage
             exact
-            path="/edit_note"
+            path="/edit_note/:noteId"
           >
             <EditNote />
           </ProtectedRoute>

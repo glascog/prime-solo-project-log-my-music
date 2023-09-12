@@ -30,22 +30,17 @@ router.get("/:id", rejectUnauthenticated, (req, res) => {
     });
 });
 
-// router.put("/:id", rejectUnauthenticated, (req, res) => {
-//   // update this album
-//   console.log("editAlbum put route");
-//   console.log("req.params.id is:", req.params.id);
-//   const albumToUpdate = req.params.id;
-//   const queryText = `UPDATE albums SET album_title = $1 WHERE id = $2`;
-//   pool
-//     .query(queryText, [req.body.album_title, albumToUpdate])
-//     .then((result) => {
-//       res.sendStatus(200);
-//     })
-//     .catch((error) => {
-//       console.log("Error on database put request", error);
-//       res.sendStatus(500);
-//     });
-// });
+// PUT route to update notes
+router.put("/:id", rejectUnauthenticated, (req, res) => {
+  console.log('editNote put route');
+  console.log("req.params.id is:", req.params.id);
+  console.log('req.body is:', req.body);
+
+  const albumNotes = req.body.notes
+
+
+});
+
 
 /**
  * POST route template
