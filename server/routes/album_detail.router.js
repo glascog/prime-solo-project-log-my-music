@@ -38,7 +38,18 @@ router.put("/:id", rejectUnauthenticated, (req, res) => {
 
   const albumNotes = req.body.notes
 
+  // fetch existing notes
+  const queryText = `SELECT notes FROM journals WHERE id = $1;`;
 
+  pool.query(queryText, [req.params.id])
+  .then((result) => {
+    const existingData = result.rows[0];
+    const updatedAlbumNotes = albumNotes || existingData.notes;
+
+    // update values in the database
+    const updateQueryText = `UPDATE journals SET notes = $1 WHERE id = $2;`;
+    pool.query(updateQueryText, [])
+  })
 });
 
 
