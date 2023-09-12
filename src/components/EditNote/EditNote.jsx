@@ -1,11 +1,14 @@
 import React from 'react';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
+import { useParams, useHistory } from 'react-router-dom';
 
 function EditNote() {
 
     const dispatch = useDispatch();
+    const history = useHistory();
     const editNote = useSelector((store) => store.editNote)
+    const { noteId } = useParams(); 
     console.log('editNote:', editNote)
 
     const handleNoteChange = (event) => {
@@ -19,10 +22,10 @@ function EditNote() {
         event.preventDefault();
 
         // put request for updating album notes
-        axios.put(`/api/album_detail/${editNote[0].id}`, editNote)
+        axios.put(`/api/album_detail/${noteId}`, editNote)
             .then(response => {
                 dispatch({ type: 'EDIT_CLEAR' });
-                history.push('/albums')
+                history.push(`/albums`)
             })
             .catch(error => {
                 console.log('error on note edit put request:', error)

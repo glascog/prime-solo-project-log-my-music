@@ -48,7 +48,16 @@ router.put("/:id", rejectUnauthenticated, (req, res) => {
 
     // update values in the database
     const updateQueryText = `UPDATE journals SET notes = $1 WHERE id = $2;`;
-    pool.query(updateQueryText, [])
+    pool.query(updateQueryText, [updatedAlbumNotes, req.params.id])
+    res.sendStatus(200);
+  })
+  .catch((error) => {
+    console.log('Error on note update', error);
+    res.sendStatus(500);
+  })
+  .catch((error) => {
+    console.log('Error on note fetch', error);
+    res.sendStatus(500);
   })
 });
 
