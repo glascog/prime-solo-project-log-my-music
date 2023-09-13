@@ -1,57 +1,73 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import LogOutButton from '../LogOutButton/LogOutButton';
-import './Nav.css';
+// import './Nav.css';
 import { useSelector } from 'react-redux';
+import { Menu, Button, rem } from '@mantine/core';
+import { IconDisc, IconUsers, IconHome2 } from '@tabler/icons-react';
+
 
 function Nav() {
   const user = useSelector((store) => store.user);
 
-  return (
+  return (<>
     <div className="nav">
       <Link to="/home">
-        <h2 className="nav-title"><img src='./images/LMMicon.png'/></h2>
+        <h2 className="nav-title"><img src='./images/LMMicon.png' /></h2>
       </Link>
-      <div>
-        {/* If no user is logged in, show these links */}
-        {!user.id && (
-          // If there's no user, show login/registration links
-          <Link className="navLink" to="/login">
-            Login / Register
-          </Link>
-        )}
-
-        {/* If a user is logged in, show these links */}
-        {user.id && (
-          <>
-            <Link className="navLink" to="/user">
-              Home
-            </Link>
-
-            <Link className="navLink" to="/info">
-              Info Page
-            </Link>
-
-            <Link className="navLink" to="/artists">
-              My Artists
-            </Link>
-
-            <Link className="navLink" to="/albums">
-              My Albums
-            </Link>
-
-
-
-
-            <LogOutButton className="navLink" />
-          </>
-        )}
-
-        <Link className="navLink" to="/about">
-          About
-        </Link>
-      </div>
     </div>
+    <Menu width={160} shadow='md'>
+      <Menu.Target><Button variant="light" color="dark" radius="lg"  style={{
+      position: 'absolute',
+      top: '10px',
+      right: '10px', // Adjust the right position as needed
+    }} >Menu</Button></Menu.Target>
+
+      <Menu.Dropdown>
+
+        <div>
+          {/* If no user is logged in, show these links */}
+          {!user.id && (
+            // If there's no user, show login/registration links
+            <Menu.Item>
+              <Link className="navLink" to="/login">
+                Login / Register
+              </Link>
+            </Menu.Item>
+          )}
+
+          {/* If a user is logged in, show these links */}
+          {user.id && (
+            <>
+
+              <Menu.Item icon={<IconHome2 size={rem(16)} />}>
+                <Link className="navLink" to="/user">
+                  Home
+                </Link>
+              </Menu.Item>
+
+              <Menu.Item icon={<IconUsers size={rem(16)} />}>
+                <Link className="navLink" to="/artists">
+                  My Artists
+                </Link>
+              </Menu.Item>
+
+              <Menu.Item icon={<IconDisc size={rem(16)} />}>
+                <Link className="navLink" to="/albums">
+                  My Albums
+                </Link>
+              </Menu.Item>
+
+              <Menu.Item>
+                <LogOutButton className="navLink" />
+              </Menu.Item>
+            </>
+          )}
+        </div>
+
+      </Menu.Dropdown>
+    </Menu>
+  </>
   );
 }
 

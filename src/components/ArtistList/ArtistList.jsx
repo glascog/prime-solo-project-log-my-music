@@ -3,8 +3,8 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import useReduxStore from '../../hooks/useReduxStore';
 import { Link } from "react-router-dom";
-import AddAlbum from "../AddAlbum/AddAlbum";
-
+import { Button } from '@mantine/core';
+import { Global } from '@mantine/core';
 
 
 function ArtistList() {
@@ -21,10 +21,8 @@ function ArtistList() {
    
    <div className="nav-buttons">
          <div>
-            <Link to='/add_album'><button>Add Album</button></Link>
-        </div>
-        <div>
-            <Link to='/albums'><button>My Albums</button></Link>
+            <Link to='/add_album'><Button color='gray' >Add Album</Button></Link>
+            <Link to='/albums'><Button color='gray'>My Albums</Button></Link>
         </div>
    <div>
     <table className="artist-table">
@@ -47,6 +45,7 @@ function ArtistList() {
         </table>
    </div>
    </div>
+  
    );
 }
 

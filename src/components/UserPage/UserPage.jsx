@@ -2,6 +2,7 @@ import React from 'react';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import {useSelector} from 'react-redux';
 import { Link } from 'react-router-dom';
+import { IconDisc, IconUsers, IconHome2 } from '@tabler/icons-react';
 
 function UserPage() {
   // this component doesn't do much to start, just renders some user reducer info to the DOM
