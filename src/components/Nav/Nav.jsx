@@ -4,7 +4,7 @@ import LogOutButton from '../LogOutButton/LogOutButton';
 // import './Nav.css';
 import { useSelector } from 'react-redux';
 import { Menu, Button, rem } from '@mantine/core';
-import { IconDisc, IconUsers, IconHome2 } from '@tabler/icons-react';
+import { IconDisc, IconMicrophone2, IconHome2 } from '@tabler/icons-react';
 
 
 function Nav() {
@@ -13,13 +13,13 @@ function Nav() {
   return (<>
     <div className="nav">
       <Link to="/home">
-        <h2 className="nav-title"><img src='./images/LMMicon.png' /></h2>
+        <div><img src='./images/LMMicon.png' width={125} /></div>
       </Link>
     </div>
     <Menu width={160} shadow='md'>
-      <Menu.Target><Button variant="light" color="dark" radius="lg"  style={{
+      <Menu.Target><Button variant="light" color="dark" radius="sm"  style={{
       position: 'absolute',
-      top: '10px',
+      top: '15px',
       right: '10px', // Adjust the right position as needed
     }} >Menu</Button></Menu.Target>
 
@@ -46,7 +46,7 @@ function Nav() {
                 </Link>
               </Menu.Item>
 
-              <Menu.Item icon={<IconUsers size={rem(16)} />}>
+              <Menu.Item icon={<IconMicrophone2 size={rem(16)} />}>
                 <Link className="navLink" to="/artists">
                   My Artists
                 </Link>
