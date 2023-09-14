@@ -189,7 +189,7 @@ function App() {
           </Route>
         </Switch>
         <Footer />
-        <BottomNav />
+        {/* <BottomNav /> */}
       </div>
   
     </Router>

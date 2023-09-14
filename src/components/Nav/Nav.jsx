@@ -3,17 +3,21 @@ import { Link } from 'react-router-dom';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import './Nav.css';
 import { useSelector } from 'react-redux';
+import {BottomNavigation, BottomNavigationAction, Paper} from "@mui/material";
+import HomeIcon from '@mui/icons-material/Home'
+import AlbumIcon from '@mui/icons-material/Album'
+import InterpreterModeIcon from '@mui/icons-material/InterpreterMode';
+import { useState } from 'react'
+
 
 
 function Nav() {
   const user = useSelector((store) => store.user);
-
+  const [value, setValue] = useState(0)
   return (<>
-    <div className="nav">
-      <Link to="/home">
-        <div><img src='./images/LMMicon.png' width={100} /></div>
-      </Link>
-    </div>
+    
+     
+    
 
 
         <div>
@@ -28,22 +32,26 @@ function Nav() {
           {/* If a user is logged in, show these links */}
           {user.id && (
             <>
+            <div className="nav">
+             <Link to="/home">
+        <div><img src='./images/LMMicon.png' width={100} /></div>
+      </Link>
+      </div>
 
-                <Link className="navLink" to="/user">
-                  Home
-                </Link>
-          
+      <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
+        <BottomNavigation
+          showLabels
+          value={value}
+          onChange={(event, newValue) => {
+            setValue(newValue);
+          }} >
+        <BottomNavigationAction label='Home' icon={<HomeIcon />} component={Link} to='/user'/>
+        <BottomNavigationAction label='Albums' icon={<AlbumIcon />} component={Link} to='/albums' />
+        <BottomNavigationAction label='Artists' icon={<InterpreterModeIcon />} component={Link} to='/artists' />
 
-             
-                <Link className="navLink" to="/artists">
-                  My Artists
-                </Link>
-          
 
-          
-                <Link className="navLink" to="/albums">
-                  My Albums
-                </Link>
+</BottomNavigation>
+</Paper>
             
                 <LogOutButton className="navLink" />
              
