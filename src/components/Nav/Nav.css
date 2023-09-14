@@ -5,7 +5,7 @@
   align-items: center;
 
   margin: 0 0 30px;
-  background-color:darkslategrey;
+  background-color:lightgray;
   overflow: hidden;
 }
 
@@ -38,5 +38,5 @@
 }
 
 .navLink:hover {
-  background-color:slategrey;
+  background-color:;
 }
