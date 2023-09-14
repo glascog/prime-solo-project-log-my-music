@@ -3,8 +3,8 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import useReduxStore from '../../hooks/useReduxStore';
 import { Link } from "react-router-dom";
-import { Button } from '@mantine/core';
-import { Global } from '@mantine/core';
+import './ArtistList.css'
+
 
 
 function ArtistList() {
@@ -21,15 +21,15 @@ function ArtistList() {
    
    <div className="nav-buttons">
          <div>
-            <Link to='/add_album'><Button color='gray' >Add Album</Button></Link>
-            <Link to='/albums'><Button color='gray'>My Albums</Button></Link>
+            <Link to='/add_album'><button color='gray' >Add Album</button></Link>
+            <Link to='/albums'><button color='gray'>My Albums</button></Link>
         </div>
    <div>
     <table className="artist-table">
         <thead>
         <tr>
         <th>Artist</th>
-        <th>Number of Albums</th>
+        <th>Albums</th>
         </tr>
         </thead>
        

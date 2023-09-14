@@ -3,17 +3,12 @@ import { Link } from 'react-router-dom';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import './Nav.css';
 import { useSelector } from 'react-redux';
-import Button from '@mui/material/Button';
-
 
 
 function Nav() {
   const user = useSelector((store) => store.user);
 
   return (<>
-
-<Button variant="contained">Hello world</Button>;
-   
     <div className="nav">
       <Link to="/home">
         <div><img src='./images/LMMicon.png' width={100} /></div>

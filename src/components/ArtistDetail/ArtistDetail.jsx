@@ -4,7 +4,6 @@ import { useDispatch } from "react-redux";
 import useReduxStore from '../../hooks/useReduxStore';
 import { useParams, Link } from "react-router-dom";
 import AlbumDetail from "../AlbumDetail/AlbumDetail";
-import { Card, Image, Text, Badge, Button, Group } from '@mantine/core';
 
 function ArtistDetail() {
 
