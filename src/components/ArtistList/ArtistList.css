@@ -3,6 +3,9 @@ table {
     width: 100%;
     text-align: left;
     font-style: normal;
+    font-size: large;
+    font-family: 'Courier New', Courier, monospace;
+
 }
 table, th, td {
     border: 1px solid black;

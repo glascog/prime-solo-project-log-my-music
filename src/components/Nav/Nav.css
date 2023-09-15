@@ -2,29 +2,41 @@
   /* flex box layout */
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: left;
 
   margin: 0 0 30px;
-  background-color:lightgray;
+  background-color: #e63946ff;
+  background-size: cover;
   overflow: hidden;
+}
+
+.logo-container {
+  margin-right: auto; /* This pushes the logo to the right */
+}
+
+.logout-container {
+  margin-left: auto; /* This pushes the logout button to the right */
+}
+.navLink {
+  display: flex;
 }
 
 .nav a {
   text-decoration: none;
 }
 
-.nav-title {
+/* .nav-title {
   font-size: 24px;
   font-weight: 700;
   color: #f2f2f2;
   padding-left: 10px;
   margin: 0;
-}
+} */
 
 .navLink {
   display: inline-block;
   color: #f2f2f2;
-  background-color:darkslategrey;
+  background-color: darkgray;
   text-align: center;
   padding: 24px 10px;
   text-decoration: none;
@@ -38,5 +50,5 @@
 }
 
 .navLink:hover {
-  background-color:;
+  background-color: darkslategrey;
 }

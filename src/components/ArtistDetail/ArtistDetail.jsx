@@ -3,7 +3,13 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import useReduxStore from '../../hooks/useReduxStore';
 import { useParams, Link } from "react-router-dom";
-import AlbumDetail from "../AlbumDetail/AlbumDetail";
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardActions from '@mui/material/CardActions';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import CardMedia from '@mui/material/CardMedia';
+import AlbumIcon from '@mui/icons-material/Album'
 
 function ArtistDetail() {
 
@@ -18,28 +24,36 @@ function ArtistDetail() {
 
 
 
-    return (<>
-
-        <div>
-            <Link to='/add_album'><button>Add Album</button></Link>
-        </div>
-
-        <div>{store.artistDetail[0]?.artist_name}</div>
-        <section className="albums">
+    return (
+        <>
+            <Link to='/add_album'>
+                <Button>Add Album</Button>
+            </Link>
 
             <div>
                 {store.artistDetail?.map(({ album_title, id }) => (
-                    <Link to={`/album_detail/${id}`} key={id}>
-                        {album_title}
-                    </Link>
+                    <Card key={id} sx={{ width: 175, marginBottom: 10 }}>
+                        <CardMedia
+                            component="img"
+                            height={140}
+                            image={process.env.PUBLIC_URL + "/images/tealvinyl.png"}
+                            alt={album_title}
+                        />
+                        <CardContent>
+                            <Typography variant="h5" component="div">
+                                {album_title}
+                            </Typography>
+                        </CardContent>
+                        <CardActions>
+                            <Link to={`/album_detail/${id}`}>
+                                <Button>View Details</Button>
+                            </Link>
+                        </CardActions>
+                    </Card>
                 ))}
             </div>
-
-        </section>
-
-
-    </>
-    )
+        </>
+    );
 }
 
 export default ArtistDetail;

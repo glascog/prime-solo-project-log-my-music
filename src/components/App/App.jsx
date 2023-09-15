@@ -27,7 +27,7 @@ import AddAlbum from '../AddAlbum/AddAlbum';
 import AddNotes from '../AddNotes/AddNotes';
 import EditAlbum from '../EditAlbum/EditAlbum';
 import EditNote from '../EditNote/EditNote';
-import BottomNav from '../Nav/BottomNav';
+// import BottomNav from '../Nav/BottomNav';
 
 import './App.css';
 
