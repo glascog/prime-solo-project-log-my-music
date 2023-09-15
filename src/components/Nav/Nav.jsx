@@ -32,7 +32,7 @@ function Nav() {
         <>
           <div className="logo-container">
             <Link to="/home">
-              <div><img src='./images/LMMicon.png' width={175} /> </div>
+              <div><img src='./images/LMMicon.png' width={135} /> </div>
             </Link>
           </div>
           <div className='logout-container'>
