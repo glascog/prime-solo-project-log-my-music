@@ -28,13 +28,13 @@ router.post("/", rejectUnauthenticated, async (req, res) => {
   const connection = await pool.connect()
   try {
     await connection.query('BEGIN;');
-    const sqlAddArtist = `INSERT INTO artists (artist_name) VALUES ($1) RETURNING id;`;
-    const result = await connection.query( sqlAddArtist, [artist_name]);
+    const sqlAddArtist = `INSERT INTO artists (artist_name, user_id) VALUES ($1, $2) RETURNING id;`;
+    const result = await connection.query( sqlAddArtist, [artist_name, req.user.id]);
     // get the artist id from the result
     const artistId = result.rows[0].id;
     // use the artist id to add a new album
-    const addNewAlbum = `INSERT INTO albums (artist_id, album_title, year_published, copy_type, track_listing) VALUES ($1, $2, $3, $4, $5);`
-    await connection.query( addNewAlbum, [artistId, album_title, year_published, copy_type, track_listing]);
+    const addNewAlbum = `INSERT INTO albums (artist_id, album_title, year_published, copy_type, track_listing, user_id) VALUES ($1, $2, $3, $4, $5, $6);`
+    await connection.query( addNewAlbum, [artistId, album_title, year_published, copy_type, track_listing, req.user.id]);
     await connection.query('COMMIT;');
     res.sendStatus(200);
   } catch(error) {

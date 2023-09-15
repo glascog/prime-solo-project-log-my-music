@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import useReduxStore from '../../hooks/useReduxStore';
+import TextField from '@mui/material/TextField'; 
+import Button from '@mui/material/Button';
 
 
 function EditAlbum() {
@@ -55,45 +57,83 @@ function EditAlbum() {
             })
     }
 
-    return (<>
-        <h2>Edit Album</h2>
+    return (
+        <>
+            <h2>Edit Album</h2>
 
-        <form onSubmit={(event) => handleSubmit(event)}>
-            <input
-                onChange={(event) => handleTitleChange(event)}
-                placeholder='Album Title'
-                value={editAlbum.album_title}
-            />
+            <form onSubmit={(event) => handleSubmit(event)}>
+                <TextField
+                    onChange={(event) => handleTitleChange(event)}
+                    label="Album Title"
+                    variant="filled"
+                    fullWidth
+                    style={{ width: '300px' }}
+                    value={editAlbum.album_title}
+                    margin="normal"
+                />
 
-            <select
-                onChange={(event) => handleYearChange(event)}
-                value={editAlbum.year_published}>
-                <option value='' disabled>Year Published</option>
-                {Array.from({ length: new Date().getFullYear() - 1900 }, (_, i) => i + 1900).map(year => (
-                    <option key={year} value={year}>{year}</option>))}
-            </select>
+                <TextField
+                    onChange={(event) => handleYearChange(event)}
+                    label="Year Published"
+                    variant="outlined"
+                    fullWidth
+                    style={{ width: '150px' }}
+                    select
+                    SelectProps={{
+                        native: true,
+                    }}
+                    value={editAlbum.year_published}
+                    margin="normal"
+                >
+                    <option value="" disabled>
+                        Year Published
+                    </option>
+                    {Array.from({ length: new Date().getFullYear() - 1900 }, (_, i) => i + 1900).map(year => (
+                        <option key={year} value={year}>
+                            {year}
+                        </option>
+                    ))}
+                </TextField>
 
-            <select
-                onChange={(event) => handleCopyChange(event)}
-                value={editAlbum.copy_type}>
-                <option value='' disabled>Copy Type</option>
-                <option value="vinyl">Vinyl</option>
-                <option value="cd">CD</option>
-                <option value="cassette">Cassette</option>
-                <option value="digital">Digital</option>
-                <option value="other">Other</option>
-            </select>
+                <TextField
+                    onChange={(event) => handleCopyChange(event)}
+                    label="Copy Type"
+                    variant="outlined"
+                    fullWidth
+                    style={{ width: '150px' }}
+                    select
+                    SelectProps={{
+                        native: true,
+                    }}
+                    value={editAlbum.copy_type}
+                    margin="normal"
+                >
+                    <option value="" disabled>
+                        Copy Type
+                    </option>
+                    <option value="vinyl">Vinyl</option>
+                    <option value="cd">CD</option>
+                    <option value="cassette">Cassette</option>
+                    <option value="digital">Digital</option>
+                    <option value="other">Other</option>
+                </TextField>
 
-            <input onChange={(event) => handleTrackListChange(event)}
-                placeholder='Track List'
-                value={editAlbum.track_listing}
-            />
+                <TextField
+                    onChange={(event) => handleTrackListChange(event)}
+                    label="Track List"
+                    variant="filled"
+                    fullWidth
+                    style={{ width: '300px' }}
+                    multiline
+                    rows={4}
+                    value={editAlbum.track_listing}
+                    margin="normal"
+                />
 
-            <input type='submit' value='Update Album' />
-        </form>
-    </>
-    )
-
+                <Button type="submit" variant="contained">Update Album</Button>
+            </form>
+        </>
+    );
 }
 
 export default EditAlbum;

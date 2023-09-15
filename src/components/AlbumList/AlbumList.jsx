@@ -11,6 +11,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Button } from "@mui/material";
 import LibraryAddIcon from '@mui/icons-material/LibraryAdd';
+import NoteAddIcon from '@mui/icons-material/NoteAdd';
 
 function AlbumList() {
     const dispatch = useDispatch();
@@ -24,21 +25,21 @@ function AlbumList() {
         <div>
             <div className="nav-buttons">
                 <div>
-                    <Link to='/add_album'><Button> Add Album</Button></Link>
+                    <Link to='/add_album'><Button startIcon={<LibraryAddIcon />}> Add Album</Button></Link>
                 </div>
             </div>
 
             <div>
-                <h1>My Albums</h1>
+                <h2>My Albums</h2>
             </div>
 
-            <TableContainer component={Paper}>
+            <TableContainer component={Paper} style={{ maxWidth: '375px', margin: 'auto' }}>
                 <Table>
                     <TableHead>
                         <TableRow>
-                            <TableCell>Album Title</TableCell>
-                            <TableCell>Artist Name</TableCell>
-                            <TableCell>Add Note</TableCell>
+                            <TableCell style={{ fontWeight: 'bold', fontSize: '16px' }}>Album Title</TableCell>
+                            <TableCell style={{ fontWeight: 'bold', fontSize: '16px' }}>Artist Name</TableCell>
+                            <TableCell style={{ fontWeight: 'bold', fontSize: '16px' }}>Add Note</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -47,7 +48,7 @@ function AlbumList() {
                                 <TableCell>{item.album_title}</TableCell>
                                 <TableCell>{item.artist_name}</TableCell>
                                 <TableCell>
-                                    <Link to={`/add_notes/${item.album_id}`}><button>Add Notes</button></Link>
+                                    <Link to={`/add_notes/${item.album_id}`}><Button startIcon={<NoteAddIcon />}></Button></Link>
                                 </TableCell>
                             </TableRow>
                         ))}

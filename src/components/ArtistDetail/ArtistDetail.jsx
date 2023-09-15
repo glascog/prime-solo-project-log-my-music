@@ -10,6 +10,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import CardMedia from '@mui/material/CardMedia';
 import AlbumIcon from '@mui/icons-material/Album'
+import './ArtistDetail.css'
 
 function ArtistDetail() {
 
@@ -30,13 +31,13 @@ function ArtistDetail() {
                 <Button>Add Album</Button>
             </Link>
 
-            <div>
+            <div className="card-container">
                 {store.artistDetail?.map(({ album_title, id }) => (
                     <Card key={id} sx={{ width: 175, marginBottom: 10 }}>
                         <CardMedia
                             component="img"
                             height={140}
-                            image={process.env.PUBLIC_URL + "/images/tealvinyl.png"}
+                            image={process.env.PUBLIC_URL + "/images/goldvinyl.png"}
                             alt={album_title}
                         />
                         <CardContent>
