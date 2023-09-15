@@ -19,6 +19,7 @@ function Nav() {
   return (<>
 
     <div className="nav">
+    <img src='./images/LMMicon.png' width={140} />
       {/* If no user is logged in, show these links */}
       {!user.id && (
         // If there's no user, show login/registration links
@@ -30,11 +31,7 @@ function Nav() {
       {/* If a user is logged in, show these links */}
       {user.id && (
         <>
-          <div className="logo-container">
-            <Link to="/home">
-              <div><img src='./images/LMMicon.png' width={135} /> </div>
-            </Link>
-          </div>
+  
           <div className='logout-container'>
             <LogOutButton className="navLink" />
           </div>

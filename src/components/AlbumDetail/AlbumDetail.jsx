@@ -93,8 +93,8 @@ function AlbumDetail() {
                             <td>{store.albumDetail[0]?.track_listing}</td>
                         </tr>
                         <tr>
-                            <td><button onClick={() => handleEditAlbum(store.albumDetail[0])}>Edit Album Info</button>
-                                <button onClick={() => handleDeleteAlbum(store.albumDetail[0])}>Delete Album</button></td>
+                            <td><button onClick={() => handleEditAlbum(store.albumDetail[0])}>Edit</button>
+                                <button onClick={() => handleDeleteAlbum(store.albumDetail[0])}>Delete</button></td>
                         </tr>
                     </tbody>
                 </table>
@@ -102,14 +102,14 @@ function AlbumDetail() {
                 <table>
                     <thead>
                         <tr>
-                            <th>Journal Entries on {store.albumDetail[0]?.album_title}</th>
+                            <th>Notes on {store.albumDetail[0]?.album_title}</th>
                         </tr>
                     </thead>
                     <tbody>{store.albumNotes.map((notes, index) => (
                         <tr key={index}>
                             <td>{notes.notes}</td>
-                            <td><button onClick={() => handleEditNote(notes.id)}>Edit Note</button>
-                            <button onClick={() => handleDeleteNote(notes.id)}>Delete Note</button></td>
+                            <td><button onClick={() => handleEditNote(notes.id)}>Edit</button>
+                            <button onClick={() => handleDeleteNote(notes.id)}>Delete</button></td>
                         </tr>
                     ))}
                     </tbody>

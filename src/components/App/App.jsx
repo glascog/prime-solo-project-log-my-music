@@ -27,8 +27,7 @@ import AddAlbum from '../AddAlbum/AddAlbum';
 import AddNotes from '../AddNotes/AddNotes';
 import EditAlbum from '../EditAlbum/EditAlbum';
 import EditNote from '../EditNote/EditNote';
-// import BottomNav from '../Nav/BottomNav';
-
+import { createTheme, ThemeProvider } from '@mui/material';
 import './App.css';
 
 function App() {
@@ -36,11 +35,21 @@ function App() {
 
   const user = useSelector(store => store.user);
 
+  const theme = createTheme({
+    palette: {
+      primary: {
+        main: '#1D3557',
+      },
+    },
+  });
+
+
   useEffect(() => {
     dispatch({ type: 'FETCH_USER' });
   }, [dispatch]);
 
   return (
+   <ThemeProvider theme={theme}>
     <Router>
       <div>
         <Nav />
@@ -193,7 +202,7 @@ function App() {
       </div>
   
     </Router>
-
+    </ThemeProvider>
   
 
   );

@@ -12,6 +12,8 @@ import Paper from '@mui/material/Paper';
 import { Button } from "@mui/material";
 import LibraryAddIcon from '@mui/icons-material/LibraryAdd';
 import NoteAddIcon from '@mui/icons-material/NoteAdd';
+import AlbumIcon from '@mui/icons-material/Album';
+
 
 function AlbumList() {
     const dispatch = useDispatch();
@@ -30,16 +32,16 @@ function AlbumList() {
             </div>
 
             <div>
-                <h2>My Albums</h2>
+                <h2>{<AlbumIcon fontSize="large" />}My Albums</h2>
             </div>
 
             <TableContainer component={Paper} style={{ maxWidth: '375px', margin: 'auto' }}>
                 <Table>
                     <TableHead>
                         <TableRow>
-                            <TableCell style={{ fontWeight: 'bold', fontSize: '16px' }}>Album Title</TableCell>
-                            <TableCell style={{ fontWeight: 'bold', fontSize: '16px' }}>Artist Name</TableCell>
-                            <TableCell style={{ fontWeight: 'bold', fontSize: '16px' }}>Add Note</TableCell>
+                            <TableCell style={{ fontWeight: 'bold', fontSize: '16px', color: '#F1FAEE' }}>Album Title</TableCell>
+                            <TableCell style={{ fontWeight: 'bold', fontSize: '16px', color: '#F1FAEE' }}>Artist Name</TableCell>
+                            <TableCell style={{ fontWeight: 'bold', fontSize: '16px', color: '#F1FAEE' }}>Add Note</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
