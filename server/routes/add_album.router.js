@@ -26,16 +26,29 @@ router.post("/", rejectUnauthenticated, async (req, res) => {
   const track_listing = req.body.track_listing;
 
   const connection = await pool.connect()
+
+  // Check if the artist already exists
+  const checkArtistQuery = `SELECT id FROM artists WHERE artist_name = $1`;
+  const checkArtistResult = await connection.query(checkArtistQuery, [artist_name]);
+
+  
   try {
     await connection.query('BEGIN;');
-    const sqlAddArtist = `INSERT INTO artists (artist_name, user_id) VALUES ($1, $2) RETURNING id;`;
-    const result = await connection.query( sqlAddArtist, [artist_name, req.user.id]);
-    // get the artist id from the result
-    const artistId = result.rows[0].id;
-    // use the artist id to add a new album
-    const addNewAlbum = `INSERT INTO albums (artist_id, album_title, year_published, copy_type, track_listing, user_id) VALUES ($1, $2, $3, $4, $5, $6);`
-    await connection.query( addNewAlbum, [artistId, album_title, year_published, copy_type, track_listing, req.user.id]);
-    await connection.query('COMMIT;');
+    if (checkArtistResult.rows.length > 0) {
+      // Artist already exists, retrieve the existing artist ID
+      const artistId = checkArtistResult.rows[0].id;
+      // Use the existing artist ID to add the new album
+      const addNewAlbum = `INSERT INTO albums (artist_id, album_title, year_published, copy_type, track_listing, user_id) VALUES ($1, $2, $3, $4, $5, $6);`;
+      await connection.query(addNewAlbum, [artistId, album_title, year_published, copy_type, track_listing, req.user.id]);
+    } else {
+      // Artist does not exist, insert a new artist entry
+      const sqlAddArtist = `INSERT INTO artists (artist_name) VALUES ($1) RETURNING id`;
+      const result = await connection.query(sqlAddArtist, [artist_name]);
+      const artistId = result.rows[0].id;
+      // Use the newly inserted artist ID to add the new album
+      const addNewAlbum = `INSERT INTO albums (artist_id, album_title, year_published, copy_type, track_listing, user_id) VALUES ($1, $2, $3, $4, $5, $6);`;
+      await connection.query(addNewAlbum, [artistId, album_title, year_published, copy_type, track_listing, req.user.id]);
+    }
     res.sendStatus(200);
   } catch(error) {
     await connection.query('ROLLBACK;');
