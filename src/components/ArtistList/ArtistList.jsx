@@ -15,7 +15,6 @@ import { Button } from "@mui/material";
 import LibraryAddIcon from "@mui/icons-material/LibraryAdd";
 import InterpreterModeIcon from '@mui/icons-material/InterpreterMode';
 import Typography from "@mui/material";
-import { PropaneTankSharp } from "@mui/icons-material";
 
 function ArtistList() {
 

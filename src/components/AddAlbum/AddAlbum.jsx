@@ -75,6 +75,7 @@ function AddAlbum() {
                     select
                     SelectProps={{
                         native: true,
+                        sx: { fontSize: '30px' },
                     }}
                     value={yearPublished}
                     margin="normal"
@@ -100,6 +101,7 @@ function AddAlbum() {
                     select
                     SelectProps={{
                         native: true,
+                        sx: {fontSize: "30px"}
                     }}
                     value={copy}
                     margin="normal"
