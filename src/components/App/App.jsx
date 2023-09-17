@@ -38,8 +38,7 @@ function App() {
   const theme = createTheme({
     palette: {
       primary: {
-        main: '#1D3557',
-        light: '#A8DADC',
+        main:'#0a0908' ,
       },
     },
   });
@@ -49,6 +48,7 @@ function App() {
   }, [dispatch]);
 
   return (
+    
    <ThemeProvider theme={theme}>
     <Router>
       <div>

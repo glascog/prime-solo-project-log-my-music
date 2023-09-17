@@ -13,15 +13,16 @@ import LogoutIcon from '@mui/icons-material/Logout';
 
 
 
+
 function Nav() {
   const user = useSelector((store) => store.user);
   const [value, setValue] = useState(0)
   return (<>
 
     <div className="nav">
-   
-      {/* If no user is logged in, show these links */}
-      <img src='./images/LMMicon.png' width={145} />
+      <div className='logo-container'>
+        <img src='./images/LogMMIcon.png' width={95} />
+      </div>
 
       {/* {!user.id && (
         // If there's no user, show login/registration links
@@ -33,8 +34,9 @@ function Nav() {
       {/* If a user is logged in, show these links */}
       {user.id && (
         <>
-  
+
           <div className='logout-container'>
+
             <LogOutButton className="navLink" />
           </div>
 

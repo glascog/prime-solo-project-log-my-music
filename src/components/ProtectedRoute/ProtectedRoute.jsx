@@ -21,7 +21,8 @@ function ProtectedRoute({ component, children, ...props }) {
   const ProtectedComponent = component || (() => children);
 
   // We return a Route component that gets added to our list of routes
-  return (
+  return (<>
+
     <Route
       // all props like 'exact' and 'path' that were passed in
       // are now passed along to the 'Route' Component
@@ -35,7 +36,7 @@ function ProtectedRoute({ component, children, ...props }) {
         <LoginPage />
       }
     </Route>
-
+    </>
   );
 }
 

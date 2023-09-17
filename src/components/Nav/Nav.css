@@ -5,7 +5,7 @@
   align-items: left;
 
   margin: 0 0 30px;
-  background-color:#1D3557;
+  background-color: lightgray;
   background-size: cover;
   overflow: hidden;
 }
@@ -14,9 +14,12 @@
   margin-right: auto; /* This pushes the logo to the right */
 }
 
-.logout-container {
-  margin-left: auto; /* This pushes the logout button to the right */
+.logo-container {
+  margin-left: 10px; /* Add margin to create space in front of the image */
+  display: flex; /* Use flexbox to align items */
+  align-items: flex-start; /* Align items to the top */
 }
+
 .navLink {
   display: flex;
 }
