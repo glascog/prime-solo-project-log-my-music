@@ -6,8 +6,9 @@ import { useParams, useHistory, Link } from "react-router-dom";
 import axios from "axios";
 import { Button } from "@mui/material";
 import EditNoteIcon from '@mui/icons-material/EditNote';
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-
+import DeleteIcon from '@mui/icons-material/Delete'; import TextareaAutosize from '@mui/material/TextareaAutosize';
+import NoteAddIcon from '@mui/icons-material/NoteAdd';
+import './AlbumDetail.css'
 
 function AlbumDetail() {
 
@@ -23,7 +24,7 @@ function AlbumDetail() {
         dispatch({ type: 'FETCH_ALBUM_NOTES', payload: Number(albumId) })
     }, [dispatch]);
 
-   const handleEditAlbum = (props) => {
+    const handleEditAlbum = (props) => {
         // dispatch to store album info in redux
         dispatch({ type: 'SET_EDIT_ALBUM', payload: store.albumDetail });
         // route to edit form
@@ -71,7 +72,7 @@ function AlbumDetail() {
                 })
         }
     };
-    
+
     const handleAddNote = (props) => {
         history.push(`/add_notes/${props}`)
     }
@@ -100,8 +101,15 @@ function AlbumDetail() {
                             <td>{store.albumDetail[0]?.track_listing}</td>
                         </tr>
                         <tr>
-                            <td><Button variant='outlined' onClick={() => handleEditAlbum(store.albumDetail[0])}><EditNoteIcon /></Button>
-                                <Button variant='outlined' onClick={() => handleDeleteAlbum(store.albumDetail[0])}><DeleteForeverIcon /></Button></td>
+                            <td><Button
+                                onClick={() => handleEditAlbum(store.albumDetail[0])}>
+                                <EditNoteIcon />
+                            </Button>
+                                <Button
+                                    onClick={() => handleDeleteAlbum(store.albumDetail[0])}>
+                                    <DeleteIcon />
+                                </Button>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -116,15 +124,35 @@ function AlbumDetail() {
                     </thead>
                     <tbody>{store.albumNotes.map((notes, index) => (
                         <tr key={index}>
-                            <td>{notes.notes}</td>
-                            <td><Button variant='outlined' onClick={() => handleEditNote(notes.id)}><EditNoteIcon /></Button>
-                            <Button variant='outlined' onClick={() => handleDeleteNote(notes.id)}><DeleteForeverIcon /></Button></td>
+                            <td>
+                                <TextareaAutosize
+                                    style={{
+                                        resize: "vertical",
+                                        fontFamily: "inherit",
+                                        fontSize: "18px",
+                                        width: "100%"
+                                    }}
+                                    value={notes.notes}
+                                    readOnly
+                                />
+                            </td>
+                            <div className="button-column">
+                                <td><Button
+                                    onClick={() => handleEditNote(notes.id)}>
+                                    <EditNoteIcon />
+                                </Button>
+                                    <Button
+                                        onClick={() => handleDeleteNote(notes.id)}>
+                                        <DeleteIcon />
+                                    </Button>
+                                </td>
+                            </div>
                         </tr>
                     ))}
                     </tbody>
                 </table>
 
-              <Button onClick={() => handleAddNote(store.albumDetail[0]?.id)} variant='outlined'>Add Notes</Button>
+                <Button onClick={() => handleAddNote(store.albumDetail[0]?.id)} variant='outlined' >{<NoteAddIcon />}</Button>
 
             </div>
         </>

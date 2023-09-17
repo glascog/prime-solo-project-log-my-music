@@ -41,8 +41,8 @@ router.post("/", rejectUnauthenticated, async (req, res) => {
       await connection.query(addNewAlbum, [artistId, album_title, year_published, copy_type, track_listing, req.user.id]);
     } else {
       // Artist does not exist, insert a new artist entry
-      const sqlAddArtist = `INSERT INTO artists (artist_name) VALUES ($1) RETURNING id;`;
-      const result = await connection.query(sqlAddArtist, [artist_name]);
+      const sqlAddArtist = `INSERT INTO artists (artist_name, user_id) VALUES ($1, $2) RETURNING id;`;
+      const result = await connection.query(sqlAddArtist, [artist_name, req.user.id]);
       console.log("result:", result);
       const NewArtistId = result.rows[0].id;
       // Use the newly inserted artist ID to add the new album
