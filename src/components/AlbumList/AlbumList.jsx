@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import useReduxStore from '../../hooks/useReduxStore';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -25,16 +25,18 @@ function AlbumList() {
     }, [dispatch]);
 
     const handleAlbumClick = (props) => {
-        history.push(`/album_detail/${props}`)
+        let albumId = props
+        history.push(`/album_detail/${albumId}`)
     };
 
     const handleAddNoteClick = (props) => {
-        history.push(`/add_notes/${props}`)
+        let albumId = props
+        history.push(`/add_notes/${albumId}`)
     };
 
     const handleAddAlbumClick = () => {
         history.push(`/add_album`)
-      };
+    };
 
     return (
         <div>
@@ -63,7 +65,7 @@ function AlbumList() {
                                 <TableCell onClick={() => handleAlbumClick(item.album_id)}>{item.album_title}</TableCell>
                                 <TableCell>{item.artist_name}</TableCell>
                                 <TableCell onClick={() => handleAddNoteClick(item.album_id)}>
-                                   <Button startIcon={<NoteAddIcon />}></Button>
+                                    <Button startIcon={<NoteAddIcon />}></Button>
                                 </TableCell>
                             </TableRow>
                         ))}

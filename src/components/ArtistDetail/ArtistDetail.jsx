@@ -2,19 +2,21 @@ import React from "react";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import useReduxStore from '../../hooks/useReduxStore';
-import { useParams, Link } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import CardMedia from '@mui/material/CardMedia';
-import AlbumIcon from '@mui/icons-material/Album'
+import LibraryAddIcon from "@mui/icons-material/LibraryAdd";
+
 import './ArtistDetail.css'
 
 function ArtistDetail() {
 
     const dispatch = useDispatch();
+    const history = useHistory();
     const store = useReduxStore();
     const { artistId } = useParams();
 
@@ -23,13 +25,20 @@ function ArtistDetail() {
         dispatch({ type: 'FETCH_ARTIST_DETAIL', payload: Number(artistId) });
     }, [dispatch]);
 
+    const handleAddAlbumClick = () => {
+        history.push(`/add_album`)
+    };
 
+    const handleAlbumDetailClick = (props) => {
+        let albumId = props
+        history.push(`/album_detail/${albumId}`)
+    }
 
     return (
         <>
-            <Link to='/add_album'>
-                <Button>Add Album</Button>
-            </Link>
+            <Typography sx={{ fontSize: '28px', fontWeight: 'bold' }}>{store.artistDetail[0]?.artist_name}</Typography>
+
+            <Button onClick={() => handleAddAlbumClick()} startIcon={<LibraryAddIcon />}> Add Album</Button>
 
             <div className="card-container">
                 {store.artistDetail?.map(({ album_title, id }) => (
@@ -46,9 +55,9 @@ function ArtistDetail() {
                             </Typography>
                         </CardContent>
                         <CardActions>
-                            <Link to={`/album_detail/${id}`}>
-                                <Button>View Details</Button>
-                            </Link>
+
+                            <Button onClick={() => handleAlbumDetailClick(id)}>View Details</Button>
+
                         </CardActions>
                     </Card>
                 ))}

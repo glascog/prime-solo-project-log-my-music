@@ -1,15 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
-import useReduxStore from '../../hooks/useReduxStore';
 import TextField from '@mui/material/TextField'; 
 import Button from '@mui/material/Button';
+import UpdateIcon from '@mui/icons-material/Update';
 
 
 function EditAlbum() {
 
-    const store = useReduxStore();
     const dispatch = useDispatch();
     const history = useHistory();
     const editAlbum = useSelector((store) => store.editAlbum);
@@ -81,6 +80,7 @@ function EditAlbum() {
                     select
                     SelectProps={{
                         native: true,
+                        sx: { fontSize: '30px' },
                     }}
                     value={editAlbum.year_published}
                     margin="normal"
@@ -104,6 +104,7 @@ function EditAlbum() {
                     select
                     SelectProps={{
                         native: true,
+                        sx: {fontSize: "30px"}
                     }}
                     value={editAlbum.copy_type}
                     margin="normal"
@@ -130,7 +131,7 @@ function EditAlbum() {
                     margin="normal"
                 />
 
-                <Button type="submit" variant="contained">Update Album</Button>
+                <Button type="submit" variant="contained" startIcon={<UpdateIcon />}>Update Album</Button>
             </form>
         </>
     );

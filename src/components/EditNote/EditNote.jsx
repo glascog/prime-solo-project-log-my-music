@@ -2,13 +2,16 @@ import React from 'react';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
+import { TextField, Button } from "@mui/material";
+import UpdateIcon from '@mui/icons-material/Update';
+
 
 function EditNote() {
 
     const dispatch = useDispatch();
     const history = useHistory();
     const editNote = useSelector((store) => store.editNote)
-    const { noteId } = useParams(); 
+    const { noteId } = useParams();
     console.log('editNote:', editNote)
 
     const handleNoteChange = (event) => {
@@ -17,7 +20,7 @@ function EditNote() {
             payload: { property: 'notes', value: event.target.value }
         });
     }
-    
+
     const handleSubmit = (event) => {
         event.preventDefault();
 
@@ -34,20 +37,27 @@ function EditNote() {
 
 
     return (<>
-        
+
         <h2>Edit Note</h2>
 
         <form onSubmit={(event) => handleSubmit(event)}>
-            <input
+            <TextField
                 onChange={(event) => handleNoteChange(event)}
+                label='Edit Album Note'
+                variant="filled"
+                fullWidth
+                style={{ width: '300px' }}
+                multiline
+                rows={4}
                 placeholder={editNote.notes}
                 value={editNote.notes}
+                margin='normal'
             />
-        <input type='submit' value='Update Note' />
+            <Button type='submit' startIcon={<UpdateIcon />}>Update Note</Button>
 
         </form>
 
-</>)
+    </>)
 
 
 }

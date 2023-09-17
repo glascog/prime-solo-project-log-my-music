@@ -3,7 +3,7 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import TextField from "@mui/material/TextField"; // Import Material-UI TextField
 import { Button } from "@mui/material";
-import PlaylistAddCircleIcon from '@mui/icons-material/PlaylistAddCircle';
+import PublishIcon from '@mui/icons-material/Publish';
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 function AddAlbum() {
@@ -47,7 +47,6 @@ function AddAlbum() {
             <h2>Add Album</h2>
 
             <form onSubmit={handleSubmit}>
-                {/* Replace standard input fields with Material-UI TextField */}
                 <TextField
                     onChange={(event) => setArtistName(event.target.value)}
                     label="Artist Name"
@@ -127,7 +126,7 @@ function AddAlbum() {
                     margin="normal"
                 />
 
-                <Button type="submit">Submit Album</Button>
+                <Button type="submit" variant="contained" startIcon={<PublishIcon />}>Submit Album</Button>
             </form>
         </>
     );

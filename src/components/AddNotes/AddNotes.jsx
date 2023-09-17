@@ -1,16 +1,12 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import useReduxStore from '../../hooks/useReduxStore';
 import { useParams, useHistory } from "react-router-dom";
 import axios from "axios";
 import { TextField, Button } from "@mui/material";
-import NoteAddIcon from '@mui/icons-material/NoteAdd';
+import PublishIcon from '@mui/icons-material/Publish';
 
 function AddNotes() {
 
-    const dispatch = useDispatch();
     const history = useHistory();
-    const store = useReduxStore();
     const { albumId } = useParams();
 
     console.log('albumId is:', albumId)
@@ -47,7 +43,7 @@ function AddNotes() {
                 value={albumNotes}
                 margin="normal"
             />
-            <button>Submit Album Notes</button>
+            <Button type="submit" startIcon={<PublishIcon />}>Submit Album Notes</Button>
 
 
         </form>

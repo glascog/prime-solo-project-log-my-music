@@ -110,6 +110,8 @@ function AlbumDetail() {
                     <thead>
                         <tr>
                             <th>Notes on {store.albumDetail[0]?.album_title}</th>
+                            <th></th>
+
                         </tr>
                     </thead>
                     <tbody>{store.albumNotes.map((notes, index) => (
