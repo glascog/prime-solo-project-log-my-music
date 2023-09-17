@@ -11,6 +11,7 @@ const {
 router.get("/:id", rejectUnauthenticated, (req, res) => {
   console.log("inside api/artist_detail GET route");
   console.log("req.params.id is", req.params.id);
+
   let queryText = `SELECT artists.artist_name, albums.album_title, albums.year_published, albums.copy_type, albums.track_listing, albums.id
                         FROM artists
                         JOIN albums ON artists.id = albums.artist_id

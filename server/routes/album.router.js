@@ -11,12 +11,17 @@ const {
 router.get("/", rejectUnauthenticated, (req, res) => {
   console.log("inside api/album GET route");
   console.log("user", req.user);
+
+  const userId = req.user.id;
+
+
   let queryText = `SELECT albums.id AS album_id, albums.album_title, artists.artist_name 
                     FROM albums
                     JOIN artists ON albums.artist_id = artists.id
+                    WHERE albums.user_id = $1
                     ORDER BY album_title ASC;`;
   pool
-    .query(queryText)
+    .query(queryText, [userId])
     .then((result) => {
       res.send(result.rows);
     })
