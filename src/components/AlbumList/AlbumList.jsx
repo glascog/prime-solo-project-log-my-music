@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import useReduxStore from '../../hooks/useReduxStore';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -18,16 +18,29 @@ import AlbumIcon from '@mui/icons-material/Album';
 function AlbumList() {
     const dispatch = useDispatch();
     const store = useReduxStore();
+    const history = useHistory();
 
     useEffect(() => {
         dispatch({ type: 'FETCH_ALBUM_LIST' });
     }, [dispatch]);
 
+    const handleAlbumClick = (props) => {
+        history.push(`/album_detail/${props}`)
+    };
+
+    const handleAddNoteClick = (props) => {
+        history.push(`/add_notes/${props}`)
+    };
+
+    const handleAddAlbumClick = () => {
+        history.push(`/add_album`)
+      };
+
     return (
         <div>
             <div className="nav-buttons">
                 <div>
-                    <Link to='/add_album'><Button startIcon={<LibraryAddIcon />}> Add Album</Button></Link>
+                    <Button onClick={() => handleAddAlbumClick()} startIcon={<LibraryAddIcon />}> Add Album</Button>
                 </div>
             </div>
 
@@ -47,10 +60,10 @@ function AlbumList() {
                     <TableBody>
                         {store.album.map((item, index) => (
                             <TableRow key={index}>
-                                <TableCell>{item.album_title}</TableCell>
+                                <TableCell onClick={() => handleAlbumClick(item.album_id)}>{item.album_title}</TableCell>
                                 <TableCell>{item.artist_name}</TableCell>
-                                <TableCell>
-                                    <Link to={`/add_notes/${item.album_id}`}><Button startIcon={<NoteAddIcon />}></Button></Link>
+                                <TableCell onClick={() => handleAddNoteClick(item.album_id)}>
+                                   <Button startIcon={<NoteAddIcon />}></Button>
                                 </TableCell>
                             </TableRow>
                         ))}

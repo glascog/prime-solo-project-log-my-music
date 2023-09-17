@@ -39,6 +39,7 @@ function App() {
     palette: {
       primary: {
         main: '#1D3557',
+        light: '#A8DADC',
       },
     },
   });
@@ -198,7 +199,6 @@ function App() {
           </Route>
         </Switch>
         <Footer />
-        {/* <BottomNav /> */}
       </div>
   
     </Router>

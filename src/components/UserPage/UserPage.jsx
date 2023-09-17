@@ -2,22 +2,29 @@ import React from 'react';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import { useSelector } from 'react-redux';
 import Button from '@mui/material/Button';
-import './UserPage.css'
+import './UserPage.css';
+import LibraryAddIcon from '@mui/icons-material/LibraryAdd';
+import { useHistory } from 'react-router-dom';
 
 
 
 function UserPage() {
 
   const user = useSelector((store) => store.user);
+  const history = useHistory();
 
   const containerStyle = {
-    backgroundImage: 'url(./images/vinylpile.jpg)',
+    backgroundImage: 'url(./images/shinyvinyl.jpg)',
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
-    minHeight: '100vh', // Adjust as needed for full page coverage
+    minHeight: '75vh', // Adjust as needed for full page coverage
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+  };
+
+  const handleAddAlbumClick = () => {
+    history.push(`/add_album`)
   };
 
   return (
@@ -26,7 +33,7 @@ function UserPage() {
     <h2>Welcome, {user.username}!</h2>
     <div style={containerStyle}>
       <div>
-        
+        <Button onClick={() => handleAddAlbumClick()} startIcon= {<LibraryAddIcon />} variant='outlined' sx={{ color: '#A8DADC', borderColor: '#A8DADC' }}>Add Album</Button>
         
       </div>
     </div>

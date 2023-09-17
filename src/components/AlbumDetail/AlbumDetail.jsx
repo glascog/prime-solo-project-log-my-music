@@ -4,6 +4,9 @@ import { useDispatch } from "react-redux";
 import useReduxStore from '../../hooks/useReduxStore';
 import { useParams, useHistory, Link } from "react-router-dom";
 import axios from "axios";
+import { Button } from "@mui/material";
+import EditNoteIcon from '@mui/icons-material/EditNote';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 
 function AlbumDetail() {
@@ -68,6 +71,10 @@ function AlbumDetail() {
                 })
         }
     };
+    
+    const handleAddNote = (props) => {
+        history.push(`/add_notes/${props}`)
+    }
 
     return (
         <>
@@ -93,8 +100,8 @@ function AlbumDetail() {
                             <td>{store.albumDetail[0]?.track_listing}</td>
                         </tr>
                         <tr>
-                            <td><button onClick={() => handleEditAlbum(store.albumDetail[0])}>Edit</button>
-                                <button onClick={() => handleDeleteAlbum(store.albumDetail[0])}>Delete</button></td>
+                            <td><Button variant='outlined' onClick={() => handleEditAlbum(store.albumDetail[0])}><EditNoteIcon /></Button>
+                                <Button variant='outlined' onClick={() => handleDeleteAlbum(store.albumDetail[0])}><DeleteForeverIcon /></Button></td>
                         </tr>
                     </tbody>
                 </table>
@@ -108,14 +115,14 @@ function AlbumDetail() {
                     <tbody>{store.albumNotes.map((notes, index) => (
                         <tr key={index}>
                             <td>{notes.notes}</td>
-                            <td><button onClick={() => handleEditNote(notes.id)}>Edit</button>
-                            <button onClick={() => handleDeleteNote(notes.id)}>Delete</button></td>
+                            <td><Button variant='outlined' onClick={() => handleEditNote(notes.id)}><EditNoteIcon /></Button>
+                            <Button variant='outlined' onClick={() => handleDeleteNote(notes.id)}><DeleteForeverIcon /></Button></td>
                         </tr>
                     ))}
                     </tbody>
                 </table>
 
-                <Link to={`/add_notes/${store.albumDetail[0]?.id}`}><button>Add Notes</button></Link>
+              <Button onClick={() => handleAddNote(store.albumDetail[0]?.id)} variant='outlined'>Add Notes</Button>
 
             </div>
         </>

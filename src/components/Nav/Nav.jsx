@@ -8,7 +8,7 @@ import HomeIcon from '@mui/icons-material/Home'
 import AlbumIcon from '@mui/icons-material/Album'
 import InterpreterModeIcon from '@mui/icons-material/InterpreterMode';
 import { useState } from 'react'
-// import navImage from './images/vinylshelf.jpg'; 
+import LogoutIcon from '@mui/icons-material/Logout';
 
 
 
@@ -19,14 +19,16 @@ function Nav() {
   return (<>
 
     <div className="nav">
-    <img src='./images/LMMicon.png' width={140} />
+   
       {/* If no user is logged in, show these links */}
-      {!user.id && (
+      <img src='./images/LMMicon.png' width={145} />
+
+      {/* {!user.id && (
         // If there's no user, show login/registration links
         <Link className="navLink" to="/login">
           Login / Register
         </Link>
-      )}
+      )} */}
 
       {/* If a user is logged in, show these links */}
       {user.id && (

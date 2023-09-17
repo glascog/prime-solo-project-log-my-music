@@ -14,7 +14,6 @@ function AddNotes() {
     const { albumId } = useParams();
 
     console.log('albumId is:', albumId)
-    // console.log(store.album)
 
     const [albumNotes, setAlbumNotes] = useState('');
 
