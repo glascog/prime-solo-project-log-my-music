@@ -10,7 +10,7 @@ function AddAlbum() {
 
     const history = useHistory();
 
-    const [artistName, setArtistName] = useState("");
+    const [artistName, setArtistName] = useState('');
     const [albumTitle, setAlbumTitle] = useState("");
     const [yearPublished, setYearPublished] = useState("");
     const [copy, setCopy] = useState("");
